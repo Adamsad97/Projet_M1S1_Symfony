@@ -4,5 +4,6 @@
         <h1>Inscription</h1>
 
         {{ form(registerForm) }}   {#   J'interprète mon formulaire registerForm en l'affichant sur la view (vue) #}
+        <p>Vous avez déjà un compte ? <a href="{{ path('app_login') }}">Connectez-vous ici</a>.</p>
     </div>
 {% endblock %}
