@@ -15,4 +15,13 @@ final class AccountController extends AbstractController
 
         ]);
     }
+
+    //Route pour modifier le mot de passe
+    #[Route('/compte/modifier-mot-passe', name: 'app_account_modify_pwd')]
+    public function password(): Response
+    {
+        return $this->render('account/password.html.twig', [
+
+        ]);
+    }
 }
