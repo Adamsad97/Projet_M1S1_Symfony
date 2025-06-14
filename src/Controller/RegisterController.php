@@ -19,9 +19,17 @@ final class RegisterController extends AbstractController
         //Je declare un objet form pour aller chercher le FormUserType.php
         $form = $this->createForm(RegisterUserType::class, $user);
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
+
             $entityManager->persist($user);
             $entityManager->flush();
+
+            $this->addFlash(
+                'success',
+                'Compte créé avec succès!',
+            );
+            return $this->redirectToRoute('app_login');
         }
         return $this->render('register/index.html.twig',[
             //J'appelle mon formulaire afin qu'il s'affiche ici
