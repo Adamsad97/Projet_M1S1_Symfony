@@ -100,6 +100,15 @@ class Product
         return $this;
     }
 
+    //Calcul du montant TTC
+    public function getpricewt()
+    {
+        $coefficient = 1 + ($this->tva / 100);
+
+        return $coefficient*$this->price;
+    }
+
+
     public function getTva(): ?float
     {
         return $this->tva;
