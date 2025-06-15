@@ -20,38 +20,29 @@ class RegisterUserType extends AbstractType
     {
         $builder
             ->add('firstname', TextType::class, [
-                'label'=>'Votre prénom',
+                'label' => 'Votre prénom',
                 'attr' => [
                     'placeholder' => 'Obligatoire*'
                 ],
                 'constraints' => [
-                    new Length([
-                        'min' => 3,
-                        'max' => 30,
-                    ])
-                ]
-
+                    new Length(min: 2, max: 30),
+                ],
             ])
             ->add('lastname', TextType::class, [
-                'label'=>'Votre nom de famille',
+                'label' => 'Votre nom de famille',
                 'attr' => [
                     'placeholder' => 'Obligatoire*'
                 ],
                 'constraints' => [
-                    new Length([
-                        'min' => 3,
-                        'max' => 30,
-                    ])
-                ]
+                    new Length(min: 2, max: 30),
+                ],
             ])
-
             ->add('email', EmailType::class, [
                 'label' => 'Votre adresse email',
                 'attr' => [
                     'placeholder' => 'Obligatoire*'
-                ]
+                ],
             ])
-
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'first_options' => [
@@ -59,49 +50,34 @@ class RegisterUserType extends AbstractType
                     'hash_property_path' => 'password',
                     'attr' => ['placeholder' => 'Obligatoire*'],
                     'constraints' => [
-                        new Length([
-                            'min' => 4,
-                            'max' => 30,
-                        ])
-                    ]
+                        new Length(min: 4, max: 30),
+                    ],
                 ],
                 'second_options' => [
                     'label' => 'Confirmer votre mot de passe',
                     'attr' => ['placeholder' => 'Obligatoire*'],
                     'constraints' => [
-                        new Length([
-                            'min' => 4,
-                            'max' => 30,
-                        ]),
-                    ]
+                        new Length(min: 4, max: 30),
+                    ],
                 ],
-                 'mapped' => false,
+                'mapped' => false,
             ])
-
-
-
-
-
             ->add('submit', SubmitType::class, [
                 'label' => 'Valider',
                 'attr' => [
                     'class' => 'btn btn-success'
-                ]
+                ],
             ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            //Contrainte d'unicité d'adresse mail
+            // Contrainte d'unicité d'adresse mail avec arguments nommés
             'constraints' => [
-                new UniqueEntity([
-                    'entityClass' => User::class,
-                    'fields' => ['email'],
-                ])
+                new UniqueEntity(fields: ['email'], entityClass: User::class),
             ],
             'data_class' => User::class,
         ]);
     }
 }
-

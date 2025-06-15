@@ -15,7 +15,7 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Form\FormEvent;
 
 
-class PasswordUserTypeForm extends AbstractType
+class PasswordUserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -35,21 +35,15 @@ class PasswordUserTypeForm extends AbstractType
                     'hash_property_path' => 'password',
                     'attr' => ['placeholder' => 'Obligatoire*'],
                     'constraints' => [
-                        new Length([
-                            'min' => 4,
-                            'max' => 30,
-                        ])
-                    ]
+                        new Length(min: 4, max: 30),
+                    ],
                 ],
                 'second_options' => [
                     'label' => 'Confirmer votre nouveau  mot de passe',
                     'attr' => ['placeholder' => 'Obligatoire*'],
                     'constraints' => [
-                        new Length([
-                            'min' => 4,
-                            'max' => 30,
-                        ]),
-                    ]
+                        new Length(min: 4, max: 30),
+                    ],
                 ],
                 'mapped' => false,
             ])

@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 
-use App\Form\PasswordUserTypeForm;
+use App\Form\PasswordUserType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -29,7 +29,7 @@ final class AccountController extends AbstractController
 
 
         $user = $this->getUser();
-        $form = $this->createForm(PasswordUserTypeForm::class, $user, [
+        $form = $this->createForm(PasswordUserType::class, $user, [
             'passwordHasher' => $passwordHasher,
         ]);
         $form->handleRequest($request);
