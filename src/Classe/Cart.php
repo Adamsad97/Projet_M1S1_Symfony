@@ -49,6 +49,23 @@ class Cart{
         $this->requestStack->getSession()->set('cart', $cart);
     }
 
+
+    //Gestion de la quantité totale du panier
+    public function fullQuantity()
+    {
+        $quantity = 0;
+        
+        // On récupère le panier ou un tableau vide si la session ne contient rien
+        $cart = $this->requestStack->getSession()->get('cart', []);
+
+        foreach ($cart as $product) {
+            $quantity += $product['quantity'];
+        }
+        return $quantity;
+    }
+
+
+
 //Fonction pour vider le panier
     public function remove()
     {
