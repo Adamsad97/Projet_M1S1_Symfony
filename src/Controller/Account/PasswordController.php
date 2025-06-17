@@ -1,33 +1,29 @@
 <?php
 
-namespace App\Controller;
-
+namespace App\Controller\Account;
 
 use App\Form\PasswordUserType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 
-final class AccountController extends AbstractController
-{
-    #[Route('/compte', name: 'app_account')]
-    public function index(): Response
-    {
-        return $this->render('account/index.html.twig', [
 
-        ]);
+final class PasswordController extends AbstractController
+{
+
+    private $entityManager;
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
     }
 
     //Route pour modifier le mot de passe
     #[Route('/compte/modifier-mot-passe', name: 'app_account_modify_pwd')]
-    public function password(Request $request, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager): Response
+    public function index(Request $request, UserPasswordHasherInterface $passwordHasher): Response
     {
-
-
         $user = $this->getUser();
         $form = $this->createForm(PasswordUserType::class, $user, [
             'passwordHasher' => $passwordHasher,
@@ -35,15 +31,17 @@ final class AccountController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid())
         {
-            $entityManager->flush();
+            $this->entityManager->flush();
             $this->addFlash(
                 'success',
                 'Votre mot de passe a été mis à jour avec succès!',
             );
         }
-        return $this->render('account/password.html.twig', [
+        return $this->render('account/password/index.html.twig', [
             'modifypwd' => $form->createView(),
-
         ]);
     }
+
 }
+?>
+

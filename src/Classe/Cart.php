@@ -8,6 +8,11 @@ class Cart{
     {
 
     }
+
+    /*
+     * add()
+     * Fonction permettant l'ajout d'un produit au panider
+     */
     public function add($product)
     {
         //Appel de la session de symfony
@@ -34,7 +39,10 @@ class Cart{
         $this->requestStack->getSession()->set('cart', $cart);
     }
 
-  //Fonction pour diminuer la quantité dans le panier
+    /*
+    * decrease()
+    * Fonction permettant le retrait d'un produit au panider
+    */
 
     public function decrease($id)
     {
@@ -50,7 +58,10 @@ class Cart{
     }
 
 
-    //Gestion de la quantité totale du panier
+    /*
+    * fullQuantity()
+    * Fonction permettant de retourner le nombre total de produit au panier
+    */
     public function fullQuantity()
     {
         // ICi, on récupère le panier ou un tableau vide si la session ne contient rien
@@ -72,6 +83,10 @@ class Cart{
         return $quantity;
     }
 
+    /*
+    * getTotalwt()
+    * Fonction permettant de retourner le montant tatal TTC de produits au panier
+    */
     public function getTotalwt()
     {
         $cart = $this->requestStack->getSession()->get('cart', []);
@@ -94,13 +109,19 @@ class Cart{
     }
 
 
-
-//Fonction pour vider le panier
+    /*
+    * remove()
+    * Fonction permettant de vider complètement le panier
+    */
     public function remove()
     {
         return $this->requestStack->getSession()->remove('cart');
     }
 
+    /*
+    * getCart()
+    * Fonction permettant de retourner le panier
+    */
     public function getCart()
     {
         return $this->requestStack->getSession()->get('cart');
