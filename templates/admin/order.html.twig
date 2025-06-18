@@ -1,0 +1,25 @@
+
+
+{% extends '@!EasyAdmin/layout.html.twig' %}
+
+{% block main %}
+    <h8>Commande n°{{ order.id }}</h8><br/>
+    {{ include('admin/state.html.twig', { field : { 'value' : order.state} } ) }}<br/><br/>
+   <span>Passée le : {{ order.createdAt|date('d/m/y') }}</span>
+    <div class="row mt-4">
+        <div class="col-md-6 my-4">
+            <strong>Adresse de livraison</strong><br/>
+            {{ order.delivry|raw }}
+        </div>
+        <div class="col-md-6">
+            <strong>Transporteur</strong><br/>
+            {{ order.carrierName|raw }}
+        </div>
+    </div>
+
+    <strong>Contenu de la commande</strong>
+    {% for product in order.orderDetails %}
+        {{ dump(product) }}
+    {% endfor %}
+
+{% endblock %}

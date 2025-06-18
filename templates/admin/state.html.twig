@@ -1,0 +1,18 @@
+
+{#
+    Gestion de satatue des commandes
+    2eme étape du tunnel d'achat
+    Récap de la commande de user
+    Insertion en BD
+    Préparation du paiement vers stripe
+#}
+
+    {% if(field.value) == 1 %}
+        <span class="badge badge-secondary">En attente de paiement</span>
+    {% elseif field.value == 2 %}
+        <span class="badge badge-success">Payée</span>
+    {% elseif field.value == 3 %}
+        <span class="badge badge-primary">Expédiée</span>
+    {% endif %}
+
+

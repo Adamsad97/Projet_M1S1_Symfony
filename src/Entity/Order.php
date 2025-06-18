@@ -32,14 +32,49 @@ class Order
     /**
      * @var Collection<int, OrderDatail>
      */
-    #[ORM\OneToMany(targetEntity: OrderDatail::class, mappedBy: 'myOrder')]
-    private Collection $orderDatails;
+    #[ORM\OneToMany(targetEntity: OrderDatail::class, mappedBy: 'myOrder', cascade: ['persist'])]
+    private Collection $orderDetails;
+    /*
+     * 1. En attente de paiement
+     * 2. Paiement validé
+     * 3. Commande Expédiée
+     */
+    #[ORM\Column]
+    private ?int $state = null;
+
+    #[ORM\ManyToOne(inversedBy: 'orders')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
 
     public function __construct()
     {
-        $this->orderDatails = new ArrayCollection();
+        $this->orderDetails = new ArrayCollection();
     }
 
+    public function getTotalwt()
+    {
+        $totalTTC = 0;
+        $products = $this->getOrderDetails();
+        foreach($products as  $product)
+        {
+            $coeff = 1+($product->getProductTva()/100);
+            $product ->getProductPrice()*$coeff;
+            $totalTTC += ($product ->getProductPrice()*$coeff)*$product->getProductQuantity();
+        }
+        return $totalTTC;
+    }
+    public function getTotalTva()
+    {
+        $totalTva = 0;
+        $products = $this->getOrderDetails();
+        foreach($products as  $product)
+        {
+            $coeff = $product->getProductTva()/100;
+            $product ->getProductPrice()*$coeff;
+            $totalTva += $product ->getProductPrice()*$coeff;
+        }
+        return $totalTva;
+    }
     public function getId(): ?int
     {
         return $this->id;
@@ -96,29 +131,53 @@ class Order
     /**
      * @return Collection<int, OrderDatail>
      */
-    public function getOrderDatails(): Collection
+    public function getOrderDetails(): Collection
     {
-        return $this->orderDatails;
+        return $this->orderDetails;
     }
 
-    public function addOrderDatail(OrderDatail $orderDatail): static
+    public function addOrderDatail(OrderDatail $orderDetail): static
     {
-        if (!$this->orderDatails->contains($orderDatail)) {
-            $this->orderDatails->add($orderDatail);
-            $orderDatail->setMyOrder($this);
+        if (!$this->orderDetails->contains($orderDetail)) {
+            $this->orderDetails->add($orderDetail);
+            $orderDetail->setMyOrder($this);
         }
 
         return $this;
     }
 
-    public function removeOrderDatail(OrderDatail $orderDatail): static
+    public function removeOrderDatail(OrderDatail $orderDetail): static
     {
-        if ($this->orderDatails->removeElement($orderDatail)) {
+        if ($this->orderDetails->removeElement($orderDetail)) {
             // set the owning side to null (unless already changed)
-            if ($orderDatail->getMyOrder() === $this) {
-                $orderDatail->setMyOrder(null);
+            if ($orderDetail->getMyOrder() === $this) {
+                $orderDetail->setMyOrder(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getState(): ?int
+    {
+        return $this->state;
+    }
+
+    public function setState(int $state): static
+    {
+        $this->state = $state;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }
