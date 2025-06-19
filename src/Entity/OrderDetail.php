@@ -6,7 +6,7 @@ use App\Repository\OrderDatailRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: OrderDatailRepository::class)]
-class OrderDatail
+class OrderDetail
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -82,6 +82,12 @@ class OrderDatail
         $this->productQuantity = $productQuantity;
 
         return $this;
+    }
+
+    public function getProductPricewt()
+    {
+        $coeff = 1 + ($this->productTva/100);
+        return $coeff * $this->productPrice;
     }
 
     public function getProductPrice(): ?float

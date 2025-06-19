@@ -102,7 +102,10 @@ class Cart{
 
         foreach ($cart as $product)
         {
-            $price +=  $price + ($product['objet']->getPricewt() * $product['quantity']);
+            //$price +=  $price + ($product['objet']->getPricewt() * $product['quantity']);
+            $price += $product['objet']->getPricewt() * $product['quantity'];
+
+
         }
 
         return $price;

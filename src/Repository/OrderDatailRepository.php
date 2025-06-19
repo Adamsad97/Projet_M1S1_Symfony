@@ -2,18 +2,18 @@
 
 namespace App\Repository;
 
-use App\Entity\OrderDatail;
+use App\Entity\OrderDetail;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<OrderDatail>
+ * @extends ServiceEntityRepository<OrderDetail>
  */
 class OrderDatailRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, OrderDatail::class);
+        parent::__construct($registry, OrderDetail::class);
     }
 
     //    /**

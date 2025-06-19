@@ -30,9 +30,9 @@ class Order
     private ?string $delivry = null;
 
     /**
-     * @var Collection<int, OrderDatail>
+     * @var Collection<int, OrderDetail>
      */
-    #[ORM\OneToMany(targetEntity: OrderDatail::class, mappedBy: 'myOrder', cascade: ['persist'])]
+    #[ORM\OneToMany(targetEntity: OrderDetail::class, mappedBy: 'myOrder', cascade: ['persist'])]
     private Collection $orderDetails;
     /*
      * 1. En attente de paiement
@@ -129,14 +129,14 @@ class Order
     }
 
     /**
-     * @return Collection<int, OrderDatail>
+     * @return Collection<int, OrderDetail>
      */
     public function getOrderDetails(): Collection
     {
         return $this->orderDetails;
     }
 
-    public function addOrderDatail(OrderDatail $orderDetail): static
+    public function addOrderDetail(OrderDetail $orderDetail): static
     {
         if (!$this->orderDetails->contains($orderDetail)) {
             $this->orderDetails->add($orderDetail);
@@ -146,7 +146,7 @@ class Order
         return $this;
     }
 
-    public function removeOrderDatail(OrderDatail $orderDetail): static
+    public function removeOrderDetail(OrderDetail $orderDetail): static
     {
         if ($this->orderDetails->removeElement($orderDetail)) {
             // set the owning side to null (unless already changed)

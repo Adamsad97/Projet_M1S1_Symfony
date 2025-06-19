@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Classe\Cart;
 use App\Entity\Order;
-use App\Entity\OrderDatail;
+use App\Entity\OrderDetail;
 use App\Form\OrderType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -73,13 +73,13 @@ final class OrderController extends AbstractController
 
             foreach ($products as $product)
             {
-                $orderDetail = new OrderDatail();
+                $orderDetail = new OrderDetail();
                 $orderDetail->setProductName($product['objet']->getName());
                 $orderDetail->setProductIllustration($product['objet']->getIllustration());
                 $orderDetail->setProductPrice($product['objet']->getPrice());
                 $orderDetail->setProductTva($product['objet']->getTva());
                 $orderDetail->setProductQuantity($product['quantity']);
-                $order->addOrderDatail($orderDetail);
+                $order->addOrderDetail($orderDetail);
             }
 
             $entityManager->persist($order);
@@ -88,6 +88,7 @@ final class OrderController extends AbstractController
         return $this->render('order/summary.html.twig', [
             'choices' => $form->getData(),
             'cart' => $products,
+            'order' => $order,
             'totalwt' => $cart->getTotalwt(),
         ]);
     }
