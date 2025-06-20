@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Classe\Cart;
 use App\Repository\OrderRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Stripe\Checkout\Session;
 use Stripe\Stripe;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -11,14 +13,24 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class PaymentController extends AbstractController
 {
-    #[Route('/command/paiement/{id_order}', name: 'app_payment')]
-    public function index($id_order, OrderRepository $orderRepository): Response
+    #[Route('/commande/paiement/{id_order}', name: 'app_payment')]
+    public function index($id_order, OrderRepository $orderRepository, EntityManagerInterface $entityManager): Response
     {
-        Stripe::setApiKey('sk_test_51RbX6LPsyRkwdLsT5iBY6OhpLFuPmAVFpV8kzhdnqq0h3NTzzh0Rasx2QydaVMrz2uUZ8ausyAmYZDPusBceRrQV00H5wBd2Yi');
-        $YOUR_DOMAIN = 'http://127.0.0.1:8000';
+        Stripe::setApiKey($_ENV['STRIPE_SECRET_KEY']);
 
-        $order = $orderRepository->findOneById($id_order);
-        $product_for_stripe = [];
+
+        //$order = $orderRepository->findOneById($id_order);
+        //$product_for_stripe = [];
+        $order = $orderRepository->findOneBy([
+            'id' => $id_order,
+            'user' => $this->getUser(),
+
+        ]);
+
+        if(!$order){
+            return $this->redirectToRoute('app_home');
+        }
+
         foreach($order->getOrderDetails() as $product)
         {
             $product_for_stripe[] =[
@@ -28,7 +40,7 @@ final class PaymentController extends AbstractController
                     'product_data' => [
                         'name' => $product->getProductName(),
                         'images' => [
-                            $YOUR_DOMAIN.'/uploads/'.$product->getProductIllustration(),
+                            $_ENV['DOMAIN'].'/uploads/'.$product->getProductIllustration(),
                         ]
                     ]
                 ],
@@ -49,23 +61,44 @@ final class PaymentController extends AbstractController
 
 
 
-
-
-
         $checkout_session = Session::create([
+            //cette ligne permet de saisir automatiquement l'adresse email de user actif qui est par defaut enrégistré
+            //Mais je la commente puisque c'est pour un environnement de test
+            //'customer_email' => $this->getUser()->getEmail(),
             'line_items' => [[
                 $product_for_stripe
             ]],
             'mode' => 'payment',
-            'success_url' => $YOUR_DOMAIN . '/success.html',
-            'cancel_url' => $YOUR_DOMAIN . '/cancel.html',
+            'success_url' => $_ENV['DOMAIN'] . '/commande/merci/{CHECKOUT_SESSION_ID}',
+            'cancel_url' => $_ENV['DOMAIN'] . '/mon-panier/annulation',
         ]);
 
-        //header("HTTP/1.1 303 See Other");
-        //header("Location: " . $checkout_session->url);
-
+        $order->setStripeSessionId($checkout_session->id);
+        $entityManager->flush();
         return $this->redirect($checkout_session->url);
 
-        die('Ok');
     }
+
+    #[Route('/commande/merci/{stripe_session_id}', name: 'app_payment_success')]
+    public function success($stripe_session_id, OrderRepository $orderRepository, EntityManagerInterface $entityManager, Cart $cart): Response
+    {
+        $order = $orderRepository->findOneBy([
+            'stripe_session_id' => $stripe_session_id,
+            'user' => $this->getUser(),
+        ]);
+        if(!$order){
+            return $this->redirectToRoute('app_home');
+        }
+        if($order->getState() == 1)
+        {
+            $order->setState(2);
+            $cart->remove();
+            $entityManager->flush();
+        }
+
+        return $this->render('payment/success.html.twig', [
+            'order' => $order,
+        ]);
+    }
+
 }
