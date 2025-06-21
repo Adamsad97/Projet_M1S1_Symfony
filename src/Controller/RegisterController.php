@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Classe\Mail;
 use App\Entity\User;
 use App\Form\RegisterUserType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -16,6 +17,7 @@ final class RegisterController extends AbstractController
     public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
         $user = new User();
+
         //Je declare un objet form pour aller chercher le FormUserType.php
         $form = $this->createForm(RegisterUserType::class, $user);
         $form->handleRequest($request);
@@ -29,6 +31,14 @@ final class RegisterController extends AbstractController
                 'success',
                 'Compte créé avec succès!',
             );
+
+            //Envoie d'un mail de confirmation d'inscription réussie
+            $mail = new Mail();
+            $vars = [
+                'firstname' => $user->getFirstname()
+            ];
+            $mail->send($user->getEmail(), $user->getFirstname().' '.$user->getLastname(), ' Beinvenu(e) sur ElecStore', 'welcome.html', $vars);
+
             return $this->redirectToRoute('app_login');
         }
         return $this->render('register/index.html.twig',[
