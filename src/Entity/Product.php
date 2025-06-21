@@ -35,6 +35,9 @@ class Product
     #[ORM\ManyToOne(inversedBy: 'products')]
     private ?Category $category = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $inHomepage = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -129,6 +132,18 @@ class Product
     public function setCategory(?Category $category): static
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function inHomepage(): ?bool
+    {
+        return $this->inHomepage;
+    }
+
+    public function setinHomepage(?bool $inHomepage): static
+    {
+        $this->inHomepage = $inHomepage;
 
         return $this;
     }
