@@ -15,7 +15,7 @@ final class InvoiceController extends AbstractController
      * Vérification de la commande pour un user donné
      */
     #[Route('/compte/facture/impression/{id_order}', name: 'app_invoice_customer')]
-    public function index(OrderRepository $orderRepository, $id_order): Response
+    public function printForCustomer(OrderRepository $orderRepository, $id_order): Response
     {
         // 1. Vérifiacation de l'objet commande(order) - Existe ?
         $order = $orderRepository->findOneById($id_order);
@@ -35,7 +35,34 @@ final class InvoiceController extends AbstractController
         $dompdf->loadHtml($html);
         $dompdf->setPaper('A4', 'portrait');
         $dompdf->render();
-        $dompdf->stream('facture.pdf', [
+        $dompdf->stream('Facture_ElecSmartDev.pdf', [
+            "Attachment" => false
+        ]);
+        exit();
+    }
+
+    /*
+    * Impression facture PDF pour un Admnistrateur connecté
+    * Vérification de la commande pour un user donné
+    */
+    #[Route('/admin/facture/impression/{id_order}', name: 'app_invoice_admin')]
+    public function printForAdmin(OrderRepository $orderRepository, $id_order): Response
+    {
+        // 1. Vérifiacation de l'objet commande(order) - Existe ?
+        $order = $orderRepository->findOneById($id_order);
+        if (!$order) {
+            return $this->redirectToRoute('admin');
+        }
+
+
+        $dompdf = new Dompdf();
+        $html = $this->renderView('invoice/index.html.twig', [
+            'order' => $order,
+        ]);
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+        $dompdf->stream('Facture_ElecSmartDev.pdf', [
             "Attachment" => false
         ]);
         exit();
