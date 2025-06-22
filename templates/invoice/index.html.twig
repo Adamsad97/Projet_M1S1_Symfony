@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+   <style>
+       .text-center{
+           text-align: center;
+       }
+       .text-right{
+           text-align: right;
+       }
+       .text-left{
+           text-align: left;
+       }
+       body{
+           font-family: Roboto, sans-serif;
+       }
+       table{
+           border-collapse: collapse;
+       }
+       table td, table th {
+           padding: 0.5rem;
+           border-top: 1px solid #ccc2a4;
+       }
+   </style>
+</head>
+<body>
+<div class="text-center">
+    <h4>Facture commande n° {{ order.id }}</h4>
+    <table style="width: 100%; border-bottom: 1px solid #ced4da">
+        <tr>
+            <td style="width: 49%">
+                <strong>ElecSmart Dev</strong><br/>
+                Adresse : <br/>
+                Code Postal, ville, France<br/>
+                email@elecsmartdev.fr<br/>
+                06 06 06 06 06<br/>
+            </td>
+            <td class="text-right">
+                {{ order.delivry|raw}}
+            </td>
+        </tr>
+    </table>
+</div>
+<h5>Votre commande</h5>
+<table style="width: 100%">
+    <thead>
+    <tr>
+        <th scope="col" class="text-left">Produit</th>
+        <th scope="col" class="text-left">Quantité</th>
+        <th scope="col" class="text-left">Prix unitaire H.T</th>
+        <th scope="col" class="text-left">TVA</th>
+        <th scope="col" class="text-right">Total T.T.C</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for product in order.orderDetails %}
+
+        <tr>
+
+
+            <td>{{ product.productName }}</td>
+            <td>{{ product.productQuantity }}</td>
+            <td>{{ product.productPrice|price }}</td>
+            <td>{{ product.productTva }}%</td>
+
+            {% set coeff = 1 + (product.productTva / 100) %}
+            <td class="text-right">{{ ((product.productPrice*coeff)*product.productQuantity )|price}}</td>
+        </tr>
+    {% endfor %}
+    <tr>
+        <td>{{ order.carrierName }}</td>
+        <td>1</td>
+        <td></td>
+        <td></td>
+        <td class="text-right">{{ order.carrierPrice|price }}</td>
+    </tr>
+    </tbody>
+</table>
+
+<div class="text-left" style="margin-top: 10px">
+    <strong>Total  H.T :</strong> {{ ( order.totalwt - order.totalTva)|price }}<br/>
+    <strong>Total  TVA :</strong> {{ order.totalTva|price }}<br/>
+    <strong>Total  T.T.C :</strong> {{ order.totalwt|price }}
+</div>
+
+</body>
+</html>
