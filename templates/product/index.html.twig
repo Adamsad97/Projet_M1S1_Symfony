@@ -13,9 +13,35 @@
                 <h1>{{ product.name }}</h1>
                 <span class="d-block">{{ product.pricewt|price }}</span>
                     {{ product.description|raw}}
-                <a href="{{ path('app_cart_add', {id : product.id}) }}" class="btn btn-success w-100 mt-3">Ajouter au panier</a>
+                <div class="d-flex align-items-center justify-content-between mt-3 ">
+                    <a href="{{ path('app_cart_add', {id : product.id}) }}" class="btn btn-success w-100 me-2">Ajouter au panier</a>
 
+                    {% if app.user%}
+                        {% if product in app.user.wishlists %}
+                            <a class="wishlist-icon wishlist-active"  href="{{path('app_account_wishlist_remove', {id : product.id})}}" >
+                                <i data-feather="heart"></i></a>
+                            </a>
+                        {% else %}
+                            <a class="wishlist-icon"  href="{{path('app_account_wishlist_add', {id : product.id})}}" >
+                                <i data-feather="heart"></i></a>
+                            </a>
+                        {% endif %}
+                    {% else %}
+                        <a data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            <i data-feather="heart"></i></a>
+                        </a>
+                    {% endif %}
+
+                </div>
             </div>
+
+            <div class="collapse" id="collapseExample">
+                <div class="mt-2">
+                    Merci de vous connecter afin d'ajouter ce produit à vos favoris. <a href="{{ path('app_login') }}">Connectez-vous</a> ou <a href="{{ path('app_register') }}">créez votre compte client</a>
+                </div>
+            </div>
+
+
         </div>
     </div>
 {% endblock %}
