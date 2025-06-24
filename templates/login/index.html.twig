@@ -19,7 +19,10 @@
         <input type="hidden" name="_target_path" value="{{ path('app_account') }}">
 
             <button class="btn btn-success mt-2 mb-3" type="submit">Me connecter</button>
-            <p>Vous n'avez pas de compte ? <a href="{{ path('app_register') }}">Créer un compte ici</a>.</p>
         </form>
+        <br/>
+            Vous n'avez pas de compte ? <a href="{{ path('app_register') }}">Créer un compte ici</a> <br/>
+            <a href="{{ path('app_password') }}">Mot de passe oublié ?</a>
+
     </div>
 {% endblock %}

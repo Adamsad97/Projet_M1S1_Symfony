@@ -58,6 +58,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Product::class)]
     private Collection $wishlists;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $token = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTime $tokenExpireAt = null;
+
     public function __construct()
     {
         $this->adresses = new ArrayCollection();
@@ -247,6 +253,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeWishlists(Product $wishlists): static
     {
         $this->wishlists->removeElement($wishlists);
+
+        return $this;
+    }
+
+    public function getToken(): ?string
+    {
+        return $this->token;
+    }
+
+    public function setToken(?string $token): static
+    {
+        $this->token = $token;
+
+        return $this;
+    }
+
+    public function getTokenExpireAt(): ?\DateTime
+    {
+        return $this->tokenExpireAt;
+    }
+
+    public function setTokenExpireAt(?\DateTime $tokenExpireAt): static
+    {
+        $this->tokenExpireAt = $tokenExpireAt;
 
         return $this;
     }

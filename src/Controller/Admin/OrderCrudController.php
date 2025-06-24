@@ -35,16 +35,6 @@ class OrderCrudController extends AbstractCrudController
 
 
 
-
-
-
-
-
-
-
-
-
-
     //Gestion des boutons (options) Créer, Modifier, Supprimer afin que l'admin
     //ne puisse ne créer, ni modifier, ni supprimer une commande. Mais plutôt la possibilité
     // d'afficher les détails des commandes
