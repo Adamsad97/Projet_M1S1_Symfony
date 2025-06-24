@@ -64,6 +64,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(nullable: true)]
     private ?\DateTime $tokenExpireAt = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?\DateTime $lastLoginAt = null;
+
     public function __construct()
     {
         $this->adresses = new ArrayCollection();
@@ -277,6 +280,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setTokenExpireAt(?\DateTime $tokenExpireAt): static
     {
         $this->tokenExpireAt = $tokenExpireAt;
+
+        return $this;
+    }
+
+    public function getLastLoginAt(): ?\DateTime
+    {
+        return $this->lastLoginAt;
+    }
+
+    public function setLastLoginAt(?\DateTime $lastLoginAt): static
+    {
+        $this->lastLoginAt = $lastLoginAt;
 
         return $this;
     }
