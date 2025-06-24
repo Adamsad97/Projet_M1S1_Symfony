@@ -44,7 +44,6 @@ final class ForgotPasswordController extends AbstractController
                 $user->setToken($token);
 
                 $date = new DateTime();
-                dump($date);
                 $date->modify('+10 minutes');
 
                 $user->setTokenExpireAt($date);
