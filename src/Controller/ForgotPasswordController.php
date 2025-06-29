@@ -36,7 +36,7 @@ final class ForgotPasswordController extends AbstractController
             $user = $repository->findOneByEmail($email);
 
             // 4. Envoyer une notification à l'utilisateur
-            $this->addFlash('success', "Si votre adresse email est existe, vous recevrez un mail pour réinitialiser votre mot de passe.");
+            $this->addFlash('success', "Si votre adresse email existe, vous recevrez un mail pour réinitialiser votre mot de passe.");
 
             // 5. Si c'est USER existe, on reset le mot de password, et on envoie par mail le nouveau password
             if($user) {

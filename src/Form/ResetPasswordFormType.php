@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Form\AbstractType;
@@ -24,14 +25,24 @@ class ResetPasswordFormType extends AbstractType
                     'hash_property_path' => 'password',
                     'attr' => ['placeholder' => 'Obligatoire*'],
                     'constraints' => [
+                        new Assert\NotBlank(),
                         new Length(min: 4, max: 30),
+                         new Assert\Regex([
+                            'pattern' => '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@£§!#&\?\*]).+$/',
+                            'message' => 'Le mot de passe doit contenir au moins une majuscule, une minuscule, un chiffre et un caractère spécial (@, £, §, !, #, &, ?, *)',
+                        ]),
                     ],
                 ],
                 'second_options' => [
                     'label' => 'Confirmer votre nouveau  mot de passe',
                     'attr' => ['placeholder' => 'Obligatoire*'],
                     'constraints' => [
+                       new Assert\NotBlank(),
                         new Length(min: 4, max: 30),
+                         new Assert\Regex([
+                            'pattern' => '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@£§!#&\?\*]).+$/',
+                            'message' => 'Le mot de passe doit contenir au moins une majuscule, une minuscule, un chiffre et un caractère spécial (@, £, §, !, #, &, ?, *)',
+                        ]),
                     ],
                 ],
                 'mapped' => false,
