@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CarrierRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -23,6 +25,16 @@ class Carrier
     #[ORM\Column]
     private ?float $price = null;
 
+    /**
+     * @var Collection<int, Order>
+     */
+    #[ORM\OneToMany(targetEntity: Order::class, mappedBy: 'carrier')]
+    private Collection $order_id;
+
+    public function __construct()
+    {
+        $this->order_id = new ArrayCollection();
+    }
     public function __toString(): string
     {
         $price = number_format($this->getPrice(), 2, ',', ' ').' €';
@@ -66,6 +78,35 @@ class Carrier
     public function setPrice(float $price): static
     {
         $this->price = $price;
+
+        return $this;
+    }
+    /**
+     * @return Collection<int, Order>
+     */
+    public function getOrderId(): Collection
+    {
+        return $this->order_id;
+    }
+
+    public function addOrderId(Order $orderId): static
+    {
+        if (!$this->order_id->contains($orderId)) {
+            $this->order_id->add($orderId);
+            $orderId->setCarrier($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrderId(Order $orderId): static
+    {
+        if ($this->order_id->removeElement($orderId)) {
+            // set the owning side to null (unless already changed)
+            if ($orderId->getCarrier() === $this) {
+                $orderId->setCarrier(null);
+            }
+        }
 
         return $this;
     }

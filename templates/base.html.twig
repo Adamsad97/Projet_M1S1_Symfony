@@ -63,7 +63,7 @@
 
 <main>
    <div class="container">
-       {% for label, messages in app.session.flashbag.peekAll() %}
+       {% for label, messages in app.session.flashbag.all() %}
            {% for message in messages %}
                <div class="alert mt-2 alert-{{ label }}">
                    {{ message }}

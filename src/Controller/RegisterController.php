@@ -1,7 +1,7 @@
 <?php
-
 namespace App\Controller;
 
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use App\Classe\Mail;
 use App\Entity\User;
 use App\Form\RegisterUserType;
@@ -23,22 +23,33 @@ final class RegisterController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Générer un token de vérification unique
+            $token = bin2hex(random_bytes(32));
+            $user->setToken($token);
+            $user->setIsVerified(false);
 
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $this->addFlash(
-                'success',
-                'Compte créé avec succès!',
-            );
-
-            //Envoie d'un mail de confirmation d'inscription réussie
+            // Envoi du mail de vérification
             $mail = new Mail();
             $vars = [
-                'firstname' => $user->getFirstname()
+                'firstname' => $user->getFirstname(),
+                // Génère une URL absolue locale pour le mail de vérification
+                'verify_url' => $this->generateUrl('app_verify_email', ['token' => $token], UrlGeneratorInterface::ABSOLUTE_URL)
             ];
-            $mail->send($user->getEmail(), $user->getFirstname().' '.$user->getLastname(), ' Beinvenu(e) sur ElecStore', 'welcome.html', $vars);
+            $mail->send(
+                $user->getEmail(),
+                $user->getFirstname().' '.$user->getLastname(),
+                'Vérifiez votre adresse email',
+                'verify.html',
+                $vars
+            );
 
+            $this->addFlash(
+                'success',
+                'Un email de vérification vous a été envoyé. Veuillez vérifier votre boîte de réception.'
+            );
             return $this->redirectToRoute('app_login');
         }
         return $this->render('register/index.html.twig',[
