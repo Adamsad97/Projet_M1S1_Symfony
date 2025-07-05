@@ -4,16 +4,7 @@
 
 {% block main %}
 
-    <h4>Agir sur la commande</h4>
-    {% if order.state != 1%}
-        <a href="{{ current_url }}">Commande en cours de préparation</a>
-        <a href="">Commande expédiée</a>
-        <a href="">Commande annulée</a>
-    {% else %}
-        Vous ne pouvez pas agir sur une commande non encore payée.
-    {% endif %}
-
-    <hr>
+    
 
     <a target="_blank" class="btn btn-success btn-sm" href="{{ path('app_invoice_admin', {id_order:order.id}) }}">Voir ou imprimer la facture</a><br/>
     <h3 CLASS="mt-2">Commande n°{{ order.id }}</h3><br/>

@@ -1,16 +1,21 @@
-
 {% if field.value == 1 %}
-    <span class="badge bg-body-secondary ">En attente de paiement</span>
+    <span class="inline-flex px-3 py-auto px-auto text-sm font-medium  h-6 items-center justify-center text-white bg-gray-700   rounded-sm">
+        En attente de paiement
+    </span>
 {% elseif field.value == 2 %}
-    <span class="badge bg-success text-white">Payée</span>
+    <span class="inline-flex px-3 py-auto px-auto text-xs font-medium h-6 items-center justify-center   text-white bg-green-600 rounded-sm ">
+        Payée
+    </span>
 {% elseif field.value == 3 %}
-    <span class="badge bg-primary">En cours de préparation</span>
+    <span class="inline-flex px-3 py-auto px-auto text-sm font-medium  h-6 items-center justify-center text-white bg-blue-600 rounded-sm">
+        En cours de préparation
+    </span>
 {% elseif field.value == 4 %}
-    <span class="badge bg-primary">Expédiée</span>
+    <span class="inline-flex px-3 py-auto px-auto text-sm font-medium  h-6 items-center justify-center text-white bg-blue-500 rounded-sm">
+        Expédiée
+    </span>
 {% elseif field.value == 5 %}
-    <span class="badge bg-primary">Annulée</span>
+    <span class="inline-flex px-3 py-auto px-auto text-sm font-medium  h-6 items-center justify-center text-white bg-red-600 rounded-sm">
+        Annulée
+    </span>
 {% endif %}
-
-
-
-

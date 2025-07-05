@@ -1,34 +1,45 @@
 {% extends '/base.html.twig' %}
 
 {% block body %}
-    <div class="container my-5">
-        <h1>Espace Client</h1>
-        <div class="row">
-            <div class="col-md-3">
-                {% include 'account/_menu.html.twig'%}
-            </div>
-            <div class="col-md-9">
-                <h5>Ma liste de souhait : ({{ app.user.wishlists|length  }})</h5>
+<div class="max-w-7xl mx-auto my-10 px-4">
+    <h1 class="text-2xl font-semibold mb-6">Espace Client</h1>
 
-                {% if app.user.wishlists|length > 0 %}
-                    <div class="row">
-                        {% for product in app.user.wishlists %}
-                            <div class="col-md-3 text-center">
-                                <a href="{{ path('app_product', {slug:product.slug}) }}" class="text-decoration-none">
-                                    <img src="/uploads/{{ product.illustration }}" class="img-fluid">
-                                    <span class="d-block fw-bold text-black">{{ product.name }}</span>
-                                </a>
-                                <span class="d-block">{{ product.pricewt|price }}</span>
-                                <a href="{{ path('app_account_wishlist_remove', {id : product.id}) }}" class="small text-secondary">Supprimer</a>
-                            </div>
-                        {% endfor %}
-                    </div>
-                {% else %}
-                    <p class="text-info">Vous n'avez pas de produit dans votre liste de souhait.</p>
-                {% endif %}
-
-            </div>
+    <div class="flex flex-col md:flex-row gap-6 md:items-start">
+        <!-- Menu latéral -->
+        <div class="w-full md:w-1/4">
+            {% include 'account/_menu.html.twig' %}
         </div>
 
+        <!-- Contenu principal -->
+        <div class="w-full md:w-3/4">
+            <h5 class="text-xl font-semibold mb-4">
+                Ma liste de souhait : ({{ app.user.wishlists|length }})
+            </h5>
+
+            {% if app.user.wishlists|length > 0 %}
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+                    {% for product in app.user.wishlists %}
+                        <div class="text-center bg-white shadow-sm p-3 rounded hover:shadow-md transition">
+                            <a href="{{ path('app_product', {slug:product.slug}) }}" class="text-gray-900 hover:text-green-800">
+                                <img src="/uploads/{{ product.illustration }}" class="mx-auto h-32 object-contain mb-2" alt="{{ product.name }}">
+                                <span class="block font-semibold">{{ product.name }}</span>
+                            </a>
+                            <span class="block text-gray-700">{{ product.pricewt|price }}</span>
+                            <a href="{{ path('app_account_wishlist_remove', {id : product.id}) }}"
+                               class="inline-flex items-center gap-1 text-sm text-red-600 hover:underline mt-1">
+                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                          d="M6 18L18 6M6 6l12 12"/>
+                                </svg>
+                                Supprimer
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="text-blue-600">Vous n'avez pas de produit dans votre liste de souhait.</p>
+            {% endif %}
+        </div>
     </div>
+</div>
 {% endblock %}

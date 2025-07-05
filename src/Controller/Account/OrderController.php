@@ -12,14 +12,15 @@ final class OrderController extends AbstractController
     #[Route('/compte/commande/{id_order}', name: 'app_account_order')]
     public function index($id_order, OrderRepository $orderRepository): Response
     {
-        $order = $orderRepository->findOneBy([
-            'id' => $id_order,
-            'user' => $this->getUser()
-        ]);
+        $order = $orderRepository->find($id_order);
 
-        if(!$order){
+        if (!$order) {
             return $this->redirectToRoute('app_home');
         }
+
+        // Vérification d'accès avec le voter
+        $this->denyAccessUnlessGranted('ORDER_VIEW', $order);
+
         return $this->render('account/order/index.html.twig', [
             'order' => $order,
         ]);

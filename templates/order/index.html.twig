@@ -1,17 +1,31 @@
 {% extends 'base.html.twig' %}
 
-
 {% block body %}
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <h1 class="text-2xl sm:text-3xl font-bold mb-8 text-gray-800">Ma commande</h1>
 
-    <div class="container my-5 small-container">
-        <h1>Ma commande</h1>
         {{ form_start(deliverForm) }}
-            {{ form_row(deliverForm.adresses) }}
-        <a href="{{ path('app_account_adresse_form') }}" class="small">Ajouter une nouvelle adresse de livraison</a>
-           <hr>
-             {{ form_row(deliverForm.carriers) }}
-        {{ form_end(deliverForm) }}
 
+        <!-- Grille des adresses -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-8">
+            {% for adresseField in deliverForm.adresses %}
+                <label class="bg-gray-100 p-4 rounded-2xl shadow-sm transition-transform duration-200 hover:scale-105 hover:bg-gradient-to-b hover:from-slate-100 hover:to-slate-300 cursor-pointer block w-full h-full">
+                    {{ form_widget(adresseField) }}
+                    {{ form_label(adresseField) }}
+                </label>
+            {% endfor %}
+        </div>
+
+        <a href="{{ path('app_account_adresse_form') }}" class="text-sm text-blue-600 hover:underline inline-block mb-8">
+            Ajouter une nouvelle adresse de livraison
+        </a>
+
+        <hr class="my-6 border-gray-300">
+
+        <div class="mb-6">
+            {{ form_row(deliverForm.carriers) }}
+        </div>
+
+        {{ form_end(deliverForm) }}
     </div>
 {% endblock %}
-
