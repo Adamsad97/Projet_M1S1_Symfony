@@ -55,6 +55,7 @@ GUIDE D'INSTALLATION EN LOCAL:
 14. Pour modifier votre mot de passe, il vous faut obligatoirement saisir l'ancien mot de passe
 15. Pour réinitialiser votre mot de passe, assurez-vous il vous faut obligatoirement l'adresse mail avec laquelle vous vous êtes inscrit(e)
 16. Vous recevrez un lien de réinitialition, ce lien est valide que pour 10 minutes
+17. Pour passer une commande, merci d'utiliser la CB fictive mise à disposition par Stripe pour des tests (CB pour le test : 4242 4242 4242 4242)
 
 URL Github : https://github.com/Adamsad97/Projet_M1S1_Symfony/tree/Symfony_Integration_TailwindCss
 Pour cloner : git clone -b Symfony_Integration_TailwindCss https://github.com/Adamsad97/Projet_M1S1_Symfony.git
