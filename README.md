@@ -1,5 +1,5 @@
 PROJET : Mise en place d'une plateforme d'e-commerce.
-Back-end : Symfony
+Back-end : Symfony 7
 Front-end : TailwindCss v4
 
 Cahier de Charge:
@@ -35,4 +35,30 @@ Pour Administrateur
   22. Permettre à L'administrateur de voir ou d'imprimer des facture
   23. Ne pas permettre à l'utilisateur de créer une commande
   23. Ne pas ermettre à L'administrateur des modifier les cordonnées de connexion des utilisateurs
-  24. 
+  24. Ne pas permettre à l'administrateur de modifier ou de supprimer une commande
+
+
+GUIDE D'INSTALLATION EN LOCAL:
+ 1. Cloner la branche concernée (git clone -b Symfony_Integration_TailwindCss https://github.com/Adamsad97/Projet_M1S1_Symfony.git)
+2. Rendez-vous dans le dossier du projer
+3. Installer les dépendances symfony (Composer install)
+4. Installer les dépendances TailwindCss (npm install)
+5. Assurez-vous d'avoir deux(2) terminaux ouverts
+6. Lancez le serveur symfony (symfony serve ou symfony server:start
+7. Lancez TailwindCss (npm run watch)
+8. Assurez-vous d'avoir un Gestion de Base de Données (XAMPP, MAMP ..)
+9. Lancez vos server SQL et APACHE)
+10. Exécutez le projet à l'aide d'un navigateur (Chrome, Firefox, Edge ...)
+11. Inscrivez-vous avec une vraie adresse mail, car la vérification de votre compte est obligatoire pour la validation de votre compte
+12. Pour le mot de passe, il faut vous faut: au moins 4 caractères (Au moins 1 majuscule, au moins une minuscule, au moins 1 chiffre, au moins un caractère spécial)
+13. Pour la confirmer votre mot de passe, vous devez saisir le même mot de passe
+14. Pour modifier votre mot de passe, il vous faut obligatoirement saisir l'ancien mot de passe
+15. Pour réinitialiser votre mot de passe, assurez-vous il vous faut obligatoirement l'adresse mail avec laquelle vous vous êtes inscrit(e)
+16. Vous recevrez un lien de réinitialition, ce lien est valide que pour 10 minutes
+
+URL Github : https://github.com/Adamsad97/Projet_M1S1_Symfony/tree/Symfony_Integration_TailwindCss
+Pour cloner : git clone -b Symfony_Integration_TailwindCss https://github.com/Adamsad97/Projet_M1S1_Symfony.git
+
+URL PRODUCTION : https://elecsmart-dev.fr
+
+Vous avez à dispositon, une Base de données avec des vraies données.
