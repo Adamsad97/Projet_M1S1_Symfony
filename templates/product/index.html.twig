@@ -1,48 +1,96 @@
 {% extends 'base.html.twig' %}
 
-
 {% block body %}
-
-    <div class="container my-5">
-        <div class="row">
-            <div class="col-md-6">
-                <img src="/uploads/{{ product.illustration }}" class="img-fluid" alt="{{ product.name }}">
-            </div>
-            <div class="col-md-6 mb-3">
-                <small> <i><a class="text-decoration-none fw-bold" href="{{ path('app_category', {slug : product.category.slug}) }}">{{ product.category }} </a>>{{ product.name }}</i></small>
-                <h1>{{ product.name }}</h1>
-                <span class="d-block">{{ product.pricewt|price }}</span>
-                    {{ product.description|raw}}
-                <div class="d-flex align-items-center justify-content-between mt-3 ">
-                    <a href="{{ path('app_cart_add', {id : product.id}) }}" class="btn btn-success w-100 me-2">Ajouter au panier</a>
-
-                    {% if app.user%}
-                        {% if product in app.user.wishlists %}
-                            <a class="wishlist-icon wishlist-active"  href="{{path('app_account_wishlist_remove', {id : product.id})}}" >
-                                <i data-feather="heart"></i></a>
-                            </a>
-                        {% else %}
-                            <a class="wishlist-icon"  href="{{path('app_account_wishlist_add', {id : product.id})}}" >
-                                <i data-feather="heart"></i></a>
-                            </a>
-                        {% endif %}
-                    {% else %}
-                        <a data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                            <i data-feather="heart"></i></a>
-                        </a>
-                    {% endif %}
-
-                </div>
-            </div>
-
-            <div class="collapse" id="collapseExample">
-                <div class="mt-2">
-                    Merci de vous connecter afin d'ajouter ce produit à vos favoris. <a href="{{ path('app_login') }}">Connectez-vous</a> ou <a href="{{ path('app_register') }}">créez votre compte client</a>
-                </div>
-            </div>
-
-
-        </div>
+<div class="container mx-auto my-5 px-4 max-w-4xl">
+  <div class="flex flex-col md:flex-row gap-6">
+    <!-- Image produit -->
+    <div class="md:w-1/2">
+      <img src="/uploads/{{ product.illustration }}" alt="{{ product.name }}"
+     class="w-50 max-h-50  object-cover  rounded-lg" />
     </div>
-{% endblock %}
 
+    <!-- Infos produit -->
+    <div class="md:w-1/2">
+      <small class="italic text-gray-600">
+        <a href="{{ path('app_category', {slug : product.category.slug}) }}" class="font-semibold hover:underline">
+          {{ product.category }}
+        </a> &gt; {{ product.name }}
+      </small>
+
+      <h1 class="text-3xl font-bold mt-2">{{ product.name }}</h1>
+
+      <span class="block text-xl text-green-600 mt-2">{{ product.pricewt|price }}</span>
+
+      <div class="mt-4 prose max-w-none">
+        {{ product.description|raw }}
+      </div>
+
+      <!-- Boutons -->
+      <div class="flex items-center gap-4 mt-6">
+        <a href="{{ path('app_cart_add', {id : product.id}) }}" 
+           class="flex-1 bg-green-600 text-white py-3 rounded-lg text-center hover:bg-green-700 transition">
+          Ajouter au panier
+        </a>
+
+        {% if app.user %}
+          {% if product in app.user.wishlists %}
+            <a href="{{ path('app_account_wishlist_remove', {id : product.id}) }}" 
+               class="text-red-600 hover:text-red-700 transition" aria-label="Retirer des favoris">
+              <!-- Cœur plein SVG -->
+              <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-8 h-8">
+                <path d="M12 21C12 21 4 13.8 4 8.5C4 5.4 6.4 3 9.5 3C11.2 3 12.8 3.9 13.5 5.2C14.2 3.9 15.8 3 17.5 3C20.6 3 23 5.4 23 8.5C23 13.8 15 21 15 21H12Z" />
+              </svg>
+            </a>
+          {% else %}
+            <a href="{{ path('app_account_wishlist_add', {id : product.id}) }}" 
+               class="text-gray-600 hover:text-red-600 transition" aria-label="Ajouter aux favoris">
+              <!-- Cœur vide SVG -->
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8">
+                <path d="M20.8 4.6c-1.4-1.4-3.7-1.4-5.1 0l-1.2 1.2-1.2-1.2c-1.4-1.4-3.7-1.4-5.1 0s-1.4 3.7 0 5.1l6.3 6.3 6.3-6.3c1.4-1.4 1.4-3.7 0-5.1z" />
+              </svg>
+            </a>
+          {% endif %}
+        {% else %}
+          <!-- Non connecté : clic affiche message -->
+          <button class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-300 hover:bg-green-300 transition shadow" id="wishlist-button" aria-label="Ajouter aux favoris (connexion requise)" 
+                  
+            <!-- Cœur vide SVG -->
+            <svg class="w-5 h-5 flex items-center justify-center"  xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8">
+              <path d="M20.8 4.6c-1.4-1.4-3.7-1.4-5.1 0l-1.2 1.2-1.2-1.2c-1.4-1.4-3.7-1.4-5.1 0s-1.4 3.7 0 5.1l6.3 6.3 6.3-6.3c1.4-1.4 1.4-3.7 0-5.1z" />
+            </svg>
+          </button>
+        {% endif %}
+      </div>
+
+      <!-- Message pour non connectés -->
+      {% if not app.user %}
+        <div id="login-message" class="hidden mt-6 p-4 bg-yellow-100 text-yellow-800 border-l-4 border-yellow-400 rounded">
+          <p class="mb-2">Merci de vous connecter afin d'ajouter ce produit à vos favoris.</p>
+          <a href="{{ path('app_login') }}" class="text-blue-600 font-medium hover:underline">Connectez-vous</a> ou
+          <a href="{{ path('app_register') }}" class="text-blue-600 font-medium hover:underline">créez votre compte client</a>.
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const wishlistButton = document.getElementById('wishlist-button');
+    const loginMessage = document.getElementById('login-message');
+
+    if (wishlistButton && loginMessage) {
+      wishlistButton.style.cursor = 'pointer';
+      wishlistButton.addEventListener('click', () => {
+        // Toggle affichage du message
+        if (loginMessage.classList.contains('hidden')) {
+          loginMessage.classList.remove('hidden');
+          loginMessage.scrollIntoView({ behavior: 'smooth' });
+        } else {
+          loginMessage.classList.add('hidden');
+        }
+      });
+    }
+  });
+</script>
+{% endblock %}

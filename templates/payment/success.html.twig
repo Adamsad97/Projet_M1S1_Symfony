@@ -1,11 +1,29 @@
 {% extends 'base.html.twig' %}
 
-
 {% block body %}
-    <div class="container my-5 text-center">
-        <img src="/assets/img/check.png" alt="Commande confirmée">
-        <h1 class="text-success text-center">Merci pour votre commande</h1>
-        <a class="btn btn-success" href="{{ path('app_account_order', {'id_order': order.id}) }}">Consulter ma commande</a>
+<div
+  class="mx-auto my-10 text-center px-6 py-8 rounded-4xl
+         w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl 2xl:max-w-3xl
+         bg-gradient-to-b from-green-100 via-green-200 to-green-300 shadow-lg"
+>
+  <img
+    src="/assets/img/check.png"
+    alt="Commande confirmée"
+    class="mx-auto w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 mb-6"
+  />
 
-    </div>
+  <h1 class="text-green-700 text-xl sm:text-2xl md:text-3xl font-semibold mb-4">
+    Merci pour votre commande
+  </h1>
+
+  <a
+    href="{{ path('app_account_order', {'id_order': order.id}) }}"
+    class="inline-block bg-green-600 text-white font-bold py-2 px-6 sm:px-8 rounded-lg
+           hover:bg-green-900 transition duration-200 text-sm sm:text-base"
+  >
+    Consulter ma commande
+  </a>
+</div>
+
+
 {% endblock %}
