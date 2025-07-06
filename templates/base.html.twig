@@ -30,13 +30,11 @@
 
 
                <li class="relative group">
-  <button class="flex items-center gap-1 hover:text-blue-400 transition focus:outline-none">
+  <button type="button" class="flex items-center gap-1 hover:text-blue-400 transition focus:outline-none md:group-hover:text-blue-400" onclick="document.getElementById('dropdown-categories').classList.toggle('hidden')">
     Catégories
-    <svg class="w-4 h-4" ...></svg>
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
   </button>
-
-  <ul class="absolute invisible group-hover:visible opacity-0 group-hover:opacity-100
-              bg-gray-800 text-white mt-2 rounded shadow-lg w-48 z-50 transition duration-200">
+  <ul id="dropdown-categories" class="absolute left-0 hidden md:group-hover:block bg-gray-800 text-white mt-2 rounded shadow-lg w-48 z-50 transition duration-200">
     {% for category in allCategories %}
       <li>
         <a href="{{ path('app_category', { slug: category.slug }) }}"
@@ -47,6 +45,16 @@
     {% endfor %}
   </ul>
 </li>
+<script>
+// Fermer le menu déroulant Catégories si on clique ailleurs (mobile)
+document.addEventListener('click', function(event) {
+    var dropdown = document.getElementById('dropdown-categories');
+    var button = event.target.closest('button');
+    if (dropdown && !dropdown.classList.contains('hidden') && (!button || !button.closest('.group')) && !dropdown.contains(event.target)) {
+        dropdown.classList.add('hidden');
+    }
+});
+</script>
 
 
 

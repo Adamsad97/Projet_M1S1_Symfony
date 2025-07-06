@@ -127,7 +127,7 @@ class Cart{
     */
     public function getCart()
     {
-        return $this->requestStack->getSession()->get('cart');
+        return $this->requestStack->getSession()->get('cart', []);
     }
 
 }

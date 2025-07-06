@@ -37,7 +37,7 @@ class UserCrudController extends AbstractCrudController
             ChoiceField::new('roles', 'Permissions')->setHelp('Vous pouvez choisir le rôle de cet utilisateur.')->setChoices([
                 'ROLE_USER' => 'ROLE_USER',
                 'ROLE_ADMIN' => 'ROLE_ADMIN',
-                //'ROLE_BANNED' => 'ROLE_BANNED',
+                'ROLE_BANNED' => 'ROLE_BANNED',
             ])->allowMultipleChoices(),
             TextField::new('email', 'Email')->OnlyOnIndex(),
 
