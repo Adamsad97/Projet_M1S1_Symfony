@@ -16,13 +16,13 @@
     <nav class="w-full px-6 flex items-center justify-between py-4">
 
         <a class="text-2xl font-bold" href="{{ path('app_home') }}">ElecSmartDev</a>
-        <button class="block md:hidden px-2 py-1 border rounded text-gray-200 border-green-700" onclick="document.getElementById('navbarCollapse').classList.toggle('hidden')">
+        <button class="block md:hidden px-2 py-1 border rounded text-gray-200 border-green-700" onclick="document.getElementById('navbar-menu').classList.toggle('hidden')">
             <!-- Menu Icon Heroicon -->
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5" />
             </svg>
         </button>
-        <div class="w-full md:flex md:items-center md:w-auto hidden " id="navbarCollapse">
+        <div class="w-full md:flex md:items-center md:w-auto hidden " id="navbar-menu">
             <ul class="flex flex-col md:flex-row md:space-x-6 mt-4 md:mt-0">
                 <li>
                     <a class="hover:text-blue-400 transition" href="{{ path('app_home') }}">Accueil</a>
@@ -118,8 +118,6 @@ document.addEventListener('click', function(event) {
 
     {% block body%}{% endblock %}
    
-
-
     <!-- FOOTER -->
     <footer class="container">
        
