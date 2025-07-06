@@ -19,13 +19,13 @@
                                 </div>
                                 <div class="col-md-4">
                                     <strong>{{ product.objet.name }}</strong>
-                                    <span class="d-block small">Prix unitaire : {{ product.objet.pricewt|price }}</span>
+                                    <span class="d-block small text-green-800">Prix unitaire : {{ product.objet.pricewt|price }}</span>
                                 </div>
                                 <div class="col-md-2 text-right">
                                     <span class="badge bg-secondary"> x{{ product.quantity }}</span>
                                 </div>
                                 <div class="col-md-4">
-                                    <strong>{{ (product.quantity*product.objet.pricewt)|price}}</strong>
+                                    <strong class="text-green-800">{{ (product.quantity*product.objet.pricewt)|price}}</strong>
                                 </div>
                             </div>
                         {% endfor %}
@@ -57,12 +57,12 @@
                     </div>
                     <div class="d-flex justify-content-between mt-2">
                         <span class="fw-bold">Total transporteur :</span>
-                        <span>{{ choices.carriers.price|price }}</span>
+                        <span class="text-green-800">{{ choices.carriers.price|price }}</span>
                     </div>
 
                     <div class="d-flex justify-content-between mt-2">
                         <span class="fw-bold">Total à payer :</span>
-                        <span>{{ (totalwt + choices.carriers.price)|price }}</span>
+                        <span class="text-green-800">{{ (totalwt + choices.carriers.price)|price }}</span>
                     </div>
 
                     {% if cart is not empty %}

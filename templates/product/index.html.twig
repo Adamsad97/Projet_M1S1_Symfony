@@ -3,14 +3,14 @@
 {% block body %}
 <div class="container mx-auto my-5 px-4 max-w-4xl">
   <div class="flex flex-col md:flex-row gap-6">
-    <!-- Image produit -->
-    <div class="md:w-1/2">
+
+    <div class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl  mt-2 mx-auto flex justify-center">
       <img src="/uploads/{{ product.illustration }}" alt="{{ product.name }}"
-     class="w-50 max-h-50  object-cover  rounded-lg" />
+     class="w-full h-auto max-h-80 object-contain rounded-lg" />
     </div>
 
-    <!-- Infos produit -->
-    <div class="md:w-1/2">
+ 
+    <div class="md:w-1/2 ">
       <small class="italic text-gray-600">
         <a href="{{ path('app_category', {slug : product.category.slug}) }}" class="font-semibold hover:underline">
           {{ product.category }}
@@ -19,16 +19,15 @@
 
       <h1 class="text-3xl font-bold mt-2">{{ product.name }}</h1>
 
-      <span class="block text-xl text-green-600 mt-2">{{ product.pricewt|price }}</span>
+      <span class="block text-xl text-green-800 mt-2 font-bold">{{ product.pricewt|price }}</span>
 
       <div class="mt-4 prose max-w-none">
         {{ product.description|raw }}
       </div>
 
-      <!-- Boutons -->
       <div class="flex items-center gap-4 mt-6">
         <a href="{{ path('app_cart_add', {id : product.id}) }}" 
-           class="flex-1 bg-green-600 text-white py-3 rounded-lg text-center hover:bg-green-700 transition">
+           class="flex-1 bg-green-600 text-white font-bold py-2 rounded-lg text-center hover:bg-green-700 transition">
           Ajouter au panier
         </a>
 
@@ -36,7 +35,7 @@
           {% if product in app.user.wishlists %}
             <a href="{{ path('app_account_wishlist_remove', {id : product.id}) }}" 
                class="text-red-600 hover:text-red-700 transition" aria-label="Retirer des favoris">
-              <!-- Cœur plein SVG -->
+          
               <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-8 h-8">
                 <path d="M12 21C12 21 4 13.8 4 8.5C4 5.4 6.4 3 9.5 3C11.2 3 12.8 3.9 13.5 5.2C14.2 3.9 15.8 3 17.5 3C20.6 3 23 5.4 23 8.5C23 13.8 15 21 15 21H12Z" />
               </svg>
@@ -44,17 +43,17 @@
           {% else %}
             <a href="{{ path('app_account_wishlist_add', {id : product.id}) }}" 
                class="text-gray-600 hover:text-red-600 transition" aria-label="Ajouter aux favoris">
-              <!-- Cœur vide SVG -->
+           
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8">
                 <path d="M20.8 4.6c-1.4-1.4-3.7-1.4-5.1 0l-1.2 1.2-1.2-1.2c-1.4-1.4-3.7-1.4-5.1 0s-1.4 3.7 0 5.1l6.3 6.3 6.3-6.3c1.4-1.4 1.4-3.7 0-5.1z" />
               </svg>
             </a>
           {% endif %}
         {% else %}
-          <!-- Non connecté : clic affiche message -->
+         
           <button class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-300 hover:bg-green-300 transition shadow" id="wishlist-button" aria-label="Ajouter aux favoris (connexion requise)" 
                   
-            <!-- Cœur vide SVG -->
+          
             <svg class="w-5 h-5 flex items-center justify-center"  xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8">
               <path d="M20.8 4.6c-1.4-1.4-3.7-1.4-5.1 0l-1.2 1.2-1.2-1.2c-1.4-1.4-3.7-1.4-5.1 0s-1.4 3.7 0 5.1l6.3 6.3 6.3-6.3c1.4-1.4 1.4-3.7 0-5.1z" />
             </svg>
@@ -62,7 +61,7 @@
         {% endif %}
       </div>
 
-      <!-- Message pour non connectés -->
+   
       {% if not app.user %}
         <div id="login-message" class="hidden mt-6 p-4 bg-yellow-100 text-yellow-800 border-l-4 border-yellow-400 rounded">
           <p class="mb-2">Merci de vous connecter afin d'ajouter ce produit à vos favoris.</p>
@@ -82,7 +81,7 @@
     if (wishlistButton && loginMessage) {
       wishlistButton.style.cursor = 'pointer';
       wishlistButton.addEventListener('click', () => {
-        // Toggle affichage du message
+        
         if (loginMessage.classList.contains('hidden')) {
           loginMessage.classList.remove('hidden');
           loginMessage.scrollIntoView({ behavior: 'smooth' });
