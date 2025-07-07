@@ -6,35 +6,35 @@
     {{ form_start(registerForm) }}
       <div class="mb-4">
         {{ form_label(registerForm.firstname, null, {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
-        {{ form_widget(registerForm.firstname, {'attr': {'class': 'w-full px-3 py-2 border border-gray-200 bg-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-green-400'}}) }}
+        {{ form_widget(registerForm.firstname, {'attr': {'class': 'w-full px-3 py-1 border border-gray-200 bg-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-green-400'}}) }}
         {% if form_errors(registerForm.firstname) %}
           <div class="text-red-600 text-sm mt-1">{{ form_errors(registerForm.firstname) }}</div>
         {% endif %}
       </div>
       <div class="mb-4">
         {{ form_label(registerForm.lastname, null, {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
-        {{ form_widget(registerForm.lastname, {'attr': {'class': 'w-full px-3 py-2 border border-gray-200 bg-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-green-400'}}) }}
+        {{ form_widget(registerForm.lastname, {'attr': {'class': 'w-full px-3 py-1 border border-gray-200 bg-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-green-400'}}) }}
         {% if form_errors(registerForm.lastname) %}
           <div class="text-red-600 text-sm mt-1">{{ form_errors(registerForm.lastname) }}</div>
         {% endif %}
       </div>
       <div class="mb-4">
         {{ form_label(registerForm.email, null, {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
-        {{ form_widget(registerForm.email, {'attr': {'class': 'w-full px-3 py-2 border border-gray-200 bg-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-green-400'}}) }}
+        {{ form_widget(registerForm.email, {'attr': {'class': 'w-full px-3 py-1 border border-gray-200 bg-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-green-400'}}) }}
         {% if form_errors(registerForm.email) %}
           <div class="text-red-600 text-sm mt-1">{{ form_errors(registerForm.email) }}</div>
         {% endif %}
       </div>
       <div class="mb-4">
         {{ form_label(registerForm.plainPassword.first, null, {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
-        {{ form_widget(registerForm.plainPassword.first, {'attr': {'class': 'w-full px-3 py-2 border border-gray-200 bg-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-green-400'}}) }}
+        {{ form_widget(registerForm.plainPassword.first, {'attr': {'class': 'w-full px-3 py-1 border border-gray-200 bg-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-green-400'}}) }}
         {% if form_errors(registerForm.plainPassword.first) %}
           <div class="text-red-600 text-sm mt-1">{{ form_errors(registerForm.plainPassword.first) }}</div>
         {% endif %}
       </div>
       <div class="mb-4">
         {{ form_label(registerForm.plainPassword.second, null, {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
-        {{ form_widget(registerForm.plainPassword.second, {'attr': {'class': 'w-full px-3 py-2 border border-gray-200 bg-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-green-400'}}) }}
+        {{ form_widget(registerForm.plainPassword.second, {'attr': {'class': 'w-full px-3 py-1 border border-gray-200 bg-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-green-400'}}) }}
         {% if form_errors(registerForm.plainPassword.second) %}
           <div class="text-red-600 text-sm mt-1">{{ form_errors(registerForm.plainPassword.second) }}</div>
         {% endif %}

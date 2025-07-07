@@ -1,9 +1,31 @@
 {% extends 'base.html.twig' %}
-    {% block body %}
-        <div class="container my-5">
-            <div class="small-block">
-                <h2>Nouveau mot de passe</h2>
-                {{ form(form) }}
-            </div>
-        </div>
-    {% endblock %}
+{% block body %}
+<div class="min-h-screen flex items-center justify-center bg-gray-50 py-8 px-4">
+  <div class="w-full max-w-md bg-gradient-to-b from-gray-300 to-gray-400 rounded-2xl p-6 shadow-md">
+    <h2 class="text-2xl font-bold mb-6 text-center">Nouveau mot de passe</h2>
+    {{ form_start(form) }}
+      <div class="mb-4">
+        {{ form_label(form.plainPassword.first, null, {'label_attr': {'class': 'block text-gray-800 font-bold mb-2 text-base'}}) }}
+        {{ form_widget(form.plainPassword.first, {'attr': {
+          'class': 'w-full rounded-2xl border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition px-4 py-1 bg-gray-200'
+        }}) }}
+        {% if form_errors(form.plainPassword.first) %}
+          <div class="text-red-600 text-sm mt-1">{{ form_errors(form.plainPassword.first) }}</div>
+        {% endif %}
+      </div>
+      <div class="mb-4">
+        {{ form_label(form.plainPassword.second, null, {'label_attr': {'class': 'block text-gray-800 font-bold mb-2 text-base'}}) }}
+        {{ form_widget(form.plainPassword.second, {'attr': {
+          'class': 'w-full rounded-2xl border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition px-4 py-1 bg-gray-200'
+        }}) }}
+        {% if form_errors(form.plainPassword.second) %}
+          <div class="text-red-600 text-sm mt-1">{{ form_errors(form.plainPassword.second) }}</div>
+        {% endif %}
+      </div>
+      <div class="mb-6">
+        {{ form_widget(form.submit, {'attr': {'class': 'w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition duration-200 shadow cursor-pointer'}}) }}
+      </div>
+    {{ form_end(form) }}
+  </div>
+</div>
+{% endblock %}

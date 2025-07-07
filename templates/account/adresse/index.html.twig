@@ -4,10 +4,9 @@
 <div class="min-h-screen bg-gray-100 py-10 px-4 flex justify-center items-start">
     <div class="w-full max-w-6xl bg-gray-200 shadow rounded-2xl  p-6">
 
-        <!-- Titre centré -->
         <h1 class="text-3xl font-bold mb-8 text-center">Espace Client</h1>
 
-        <!-- Layout responsive -->
+        
         <div class="flex flex-col md:flex-row gap-8">
 
             <!-- Menu latéral -->
@@ -19,7 +18,7 @@
 
             <!-- Bloc adresses -->
             <div class="w-full md:w-3/4">
-                <!-- En-tête avec bouton -->
+                
                 <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mb-6">
                     <h5 class="text-xl font-semibold text-center sm:text-left w-full sm:w-auto">Mes adresses</h5>
                     <a href="{{ path('app_account_adresse_form') }}"
@@ -28,11 +27,11 @@
                     </a>
                 </div>
 
-                <!-- Message si vide -->
+                
                 {% if app.user.adresses|length == 0 %}
                     <p class="text-red-600 text-center">Vous n'avez aucune adresse enregistrée pour le moment !</p>
                 {% else %}
-                    <!-- Liste des adresses -->
+                    
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                         {% for adresses in app.user.adresses %}
                             <div class="bg-gray-100 p-4 rounded-2xl shadow-sm transform hover:scale-105 hover:bg-gradient-to-b hover:from-slate-100 hover:to-slate-300 cursor-pointer">

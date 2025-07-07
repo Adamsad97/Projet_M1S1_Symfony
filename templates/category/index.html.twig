@@ -1,18 +1,18 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="container mx-auto my-12 text-center">
-        <h1 class="font-bold text-3xl mb-4">{{ category.name }}</h1>
-        <p class="mb-8">Pour cette catégorie, il reste {{ category.products|length }} produit(s) disponible(s)</p>
+    <div class="max-w-6xl mx-auto py-12 px-4">
+        <h1 class="font-extrabold text-4xl mb-4 text-center text-green-900 tracking-tight">{{ category.name }}</h1>
+        <p class="mb-10 text-center text-gray-700 text-lg">Pour cette catégorie, il reste {{ category.products|length }} produit(s) disponible(s)</p>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {% for product in category.products %}
-                <div class="text-center bg-green-50 rounded-2xl p-2 w-full sm:w-40 md:w-52 lg:w-60 mx-auto transition duration-200 hover:bg-green-100 group">
-                    <a href="{{ path('app_product', {slug:product.slug}) }}" class="no-underline transition duration-200 block">
-                    <img src="/uploads/{{ product.illustration }}" alt="{{ product.name }}" class="mx-auto w-20 h-auto rounded-2xl object-contain shadow transition-transform duration-200 group-hover:scale-110">
-                        <span class="block font-semibold text-black mt-2">{{ product.name }}</span>
+                <div class="flex flex-col items-center bg-green-50 rounded-2xl p-4 shadow hover:bg-green-100 transition group">
+                    <a href="{{ path('app_product', {slug:product.slug}) }}" class="block w-full">
+                        <img src="/uploads/{{ product.illustration }}" alt="{{ product.name }}" class="mx-auto w-28 h-28 rounded-2xl object-contain shadow-sm transition-transform duration-200 group-hover:scale-105 bg-white">
+                        <span class="block font-semibold text-green-900 mt-3 text-lg">{{ product.name }}</span>
                     </a>
-                    <span class="block text-green-700 mt-1">{{ product.pricewt|price }}</span>
+                    <span class="block text-green-700 mt-2 text-base font-bold">{{ product.pricewt|price }}</span>
                 </div>
             {% endfor %}
         </div>

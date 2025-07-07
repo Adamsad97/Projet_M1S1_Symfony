@@ -2,72 +2,68 @@
 
 {% block body %}
 
-    <div class="container my-5">
-        <h1>Récapitulatif de ma commande</h1>
-        <div class="row">
-            <div class="col-md-8">
-                <div class="bg-light-blue p-3">
-
-                    <strong>Contenu de mon panier<br/></strong>
+    <div class="max-w-5xl mx-auto py-10 px-2">
+        <h1 class="text-3xl font-extrabold mb-10 text-center tracking-tight text-gray-900">Récapitulatif de ma commande</h1>
+        <div class="flex flex-col lg:flex-row gap-10">
+            <div class="w-full lg:w-2/3 flex flex-col gap-6">
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-6 shadow">
+                    <strong class="block mb-4 text-lg text-blue-900">Contenu de mon panier</strong>
                     {% if cart is empty %}
-                        <div class="alert alert-info my-4">Votre panier est vide.</div>
+                        <div class="bg-blue-100 text-blue-800 rounded p-4 my-6 text-center font-semibold">Votre panier est vide.</div>
                     {% else %}
                         {% for product in cart %}
-                            <div class="row mt-2">
-                                <div class="col-md-2">
-                                    <img src="/uploads/{{product.objet.illustration}}" alt="{{ product.objet.name }}" class="img-fluid">
+                            <div class="flex flex-row items-center gap-6 border-b border-gray-200 py-3 last:border-b-0">
+                                <div class="flex-shrink-0 w-14 h-14 rounded-lg overflow-hidden bg-white flex items-center justify-center shadow-sm">
+                                    <img src="/uploads/{{product.objet.illustration}}" alt="{{ product.objet.name }}" class="object-contain max-h-12 max-w-12">
                                 </div>
-                                <div class="col-md-4">
-                                    <strong>{{ product.objet.name }}</strong>
-                                    <span class="d-block small text-green-800">Prix unitaire : {{ product.objet.pricewt|price }}</span>
+                                <div class="flex-1">
+                                    <strong class="block text-base text-gray-900">{{ product.objet.name }}</strong>
+                                    <span class="block text-green-800 text-xs mt-1">Prix unitaire : {{ product.objet.pricewt|price }}</span>
                                 </div>
-                                <div class="col-md-2 text-right">
-                                    <span class="badge bg-secondary"> x{{ product.quantity }}</span>
+                                <div class="text-right min-w-12">
+                                    <span class="inline-block bg-gray-200 text-gray-800 rounded px-2 py-1 text-xs font-semibold">x{{ product.quantity }}</span>
                                 </div>
-                                <div class="col-md-4">
-                                    <strong class="text-green-800">{{ (product.quantity*product.objet.pricewt)|price}}</strong>
+                                <div class="text-right min-w-20">
+                                    <strong class="text-green-800 text-base">{{ (product.quantity*product.objet.pricewt)|price}}</strong>
                                 </div>
                             </div>
                         {% endfor %}
                     {% endif %}
                 </div>
-
-                <div class="bg-light-blue p-3 my-3">
-                    <strong>Votre adresse de livraison</strong><br/>
-                    {{ choices.adresses.firstname }} {{ choices.adresses.lastname }}<br/>
-                    {{ choices.adresses.adresse }}<br/>
-                    {{ choices.adresses.postal }}, {{ choices.adresses.city }} - {{ choices.adresses.country }} <br/>
-
-                    {#{{ choices.adresses.phone }} #}
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-6 shadow">
+                    <strong class="block mb-2 text-blue-900">Votre adresse de livraison</strong>
+                    <div class="text-gray-800 text-sm leading-relaxed">
+                        {{ choices.adresses.firstname }} {{ choices.adresses.lastname }}<br/>
+                        {{ choices.adresses.adresse }}<br/>
+                        {{ choices.adresses.postal }}, {{ choices.adresses.city }} - {{ choices.adresses.country }} <br/>
+                        {#{{ choices.adresses.phone }} #}
+                    </div>
                 </div>
-
-
-                <div class="bg-light p-3">
-                    <strong>Votre transporteur</strong><br/>
-                    {{ choices.carriers.name }}<br/>
-                    {{ choices.carriers.description }}
+                <div class="bg-gray-50 rounded-2xl p-6 shadow">
+                    <strong class="block mb-2 text-blue-900">Votre transporteur</strong>
+                    <div class="text-gray-800 text-sm">
+                        {{ choices.carriers.name }}<br/>
+                        {{ choices.carriers.description }}
+                    </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="bg-light p-3">
-                    <div class="d-flex justify-content-between">
-                        <span CLASS="fw-bold">Total Produit :</span>
-                        <span>{{ fullCartQuantity}}</span>
-
+            <div class="w-full lg:w-1/3">
+                <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-6 shadow flex flex-col gap-2">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="font-semibold text-gray-900">Total Produit :</span>
+                        <span class="text-gray-900">{{ fullCartQuantity}}</span>
                     </div>
-                    <div class="d-flex justify-content-between mt-2">
-                        <span class="fw-bold">Total transporteur :</span>
-                        <span class="text-green-800">{{ choices.carriers.price|price }}</span>
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="font-semibold text-gray-900">Total transporteur :</span>
+                        <span class="text-green-800 font-semibold">{{ choices.carriers.price|price }}</span>
                     </div>
-
-                    <div class="d-flex justify-content-between mt-2">
-                        <span class="fw-bold">Total à payer :</span>
-                        <span class="text-green-800">{{ (totalwt + choices.carriers.price)|price }}</span>
+                    <div class="flex justify-between items-center mb-2 border-t border-gray-200 pt-2">
+                        <span class="font-bold text-lg text-gray-900">Total à payer :</span>
+                        <span class="text-green-900 text-xl font-extrabold">{{ (totalwt + choices.carriers.price)|price }}</span>
                     </div>
-
                     {% if cart is not empty %}
-                    <div>
-                        <a class="btn btn-success w-100 mt-3" href="{{ path('app_payment', {'id_order' : order.id}) }}">Payer</a>
+                    <div class="mt-4">
+                        <a class="block w-full bg-green-700 hover:bg-green-900 text-white font-bold py-1 px-4 rounded-xl text-center transition text-lg shadow" href="{{ path('app_payment', {'id_order' : order.id}) }}">Payer</a>
                     </div>
                     {% endif %}
                 </div>
