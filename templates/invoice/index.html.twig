@@ -3,29 +3,29 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
-   <style>
-       .text-center{
-           text-align: center;
-       }
-       .text-right{
-           text-align: right;
-       }
-       .text-left{
-           text-align: left;
-       }
-       body{
-           font-family: Roboto, sans-serif;
-       }
-       table{
-           border-collapse: collapse;
-       }
-       table td, table th {
-           padding: 0.5rem;
-           border-top: 1px solid #ccc2a4;
-       }
-   </style>
+    <title>ElecSmartDev</title>
 </head>
+<style>
+    .text-center{
+        text-align: center;
+    }
+    .text-right{
+        text-align: right;
+    }
+    .text-left{
+        text-align: left;
+    }
+    body{
+        font-family: Roboto, sans-serif;
+    }
+    table{
+        border-collapse: collapse;
+    }
+    table td, table th {
+        padding: 0.5rem;
+        border-top: 1px solid #ccc2a4;
+    }
+</style>
 <body>
 <div class="text-center">
     <h4>Facture commande n° {{ order.id }}</h4>
@@ -86,5 +86,6 @@
     <strong>Total  T.T.C :</strong> {{ order.totalwt|price }}
 </div>
 
+</body>
 </body>
 </html>
