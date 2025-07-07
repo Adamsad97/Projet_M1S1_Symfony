@@ -1,82 +1,98 @@
 <?php
+
 namespace App\DataFixtures;
 
+use App\Entity\Adresse;
+use App\Entity\Carrier;
 use App\Entity\Category;
 use App\Entity\Product;
+use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
-use App\Entity\User;
-use App\Entity\Carrier;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-
 class AppFixtures extends Fixture
 {
-    private $passwordHasher;
-
-    public function __construct(UserPasswordHasherInterface $passwordHasher)
-    {
-        $this->passwordHasher = $passwordHasher;
-    }
-
     public function load(ObjectManager $manager): void
     {
-        // Catégories
-        $category1 = new Category();
-        $category1->setName('SmartPhone');
-        $category1->setSlug('smartphone');
-        $manager->persist($category1);
+        // USERS
+        $user1 = new User();
+        $user1->setEmail('diawaraad97@gmail.com');
+        $user1->setRoles(['ROLE_USER', 'ROLE_ADMIN']);
+        $user1->setPassword('$2y$13$jVXanGBQdvfoX3Sp.KC9euSd12m6sio2CMuJOXw7rW0SsQ6.qTbuq');
+        $user1->setFirstname('Adama');
+        $user1->setLastname('Diawara');
+        $user1->setIsVerified(true);
+        $manager->persist($user1);
 
-        $category2 = new Category();
-        $category2->setName('Montre connectée');
-        $category2->setSlug('montre-connectee');
-        $manager->persist($category2);
+        $user2 = new User();
+        $user2->setEmail('diawaraad79@gmail.com');
+        $user2->setRoles([]);
+        $user2->setPassword('$2y$13$RatuzFT2cxep8juiEDLRQOOykN7IGNTVg6pZNKJTJOvoCcUuFeUUm');
+        $user2->setFirstname('Adama');
+        $user2->setLastname('Diawara');
+        $user2->setIsVerified(true);
+        $manager->persist($user2);
 
-        // Produits
-        $product1 = new Product();
-        $product1->setCategory($category2);
-        $product1->setName('Montre connectée');
-        $product1->setSlug('montre-connectee');
-        $product1->setDescription('<div>Montre connecté<br>Couleur : Gris<br>Autonomie : 48h<br><br></div>');
-        $product1->setIllustration('2025-07-03-626b7034cdbf7df74157e850677815d69a75638c.jpg');
-        $product1->setPrice(130);
-        $product1->setTva(20);
-        $product1->setinHomepage(0);
-        $manager->persist($product1);
+        // CATEGORIES
+        $categories = [];
+        $categoryNames = ['Smartphone', 'Montre connectée', 'PC portable'];
 
-        $product2 = new Product();
-        $product2->setCategory($category1);
-        $product2->setName('Smartphone');
-        $product2->setSlug('smartphone');
-        $product2->setDescription('<div>Iphone 16<br>Couleur : Rose<br>Autonomie : 26h</div>');
-        $product2->setIllustration('2025-07-03-748a499dfd2c63cb00dc6452a2ce390e4492eebf.jpg');
-        $product2->setPrice(900);
-        $product2->setTva(10);
-        $product2->setinHomepage(0);
-        $manager->persist($product2);
+        foreach ($categoryNames as $name) {
+            $category = new Category();
+            $category->setName($name);
+            $category->setSlug(strtolower(str_replace(' ', '-', $name)));
+            $manager->persist($category);
+            $categories[] = $category;
+        }
 
-        // Carrier
+        // PRODUCTS
+        for ($i = 1; $i <= 10; $i++) {
+            $product = new Product();
+            $category = $categories[array_rand($categories)];
+
+            $product->setCategory($category);
+            $product->setName($category->getName() . " modèle $i");
+            $product->setSlug(strtolower($category->getSlug() . "-modele-$i"));
+            $product->setDescription("Description du produit $i<br>Catégorie : " . $category->getName() . "<br>Autonomie : " . rand(10, 50) . "h");
+            $product->setIllustration("products/produit{$i}.jpg"); // seulement le chemin relatif, sans /uploads
+            $product->setPrice(rand(100, 1000));
+            $product->setTva(20);
+            $manager->persist($product);
+        }
+
+        // CARRIERS
         $carrier1 = new Carrier();
         $carrier1->setName('Colissimo');
-        $carrier1->setDescription("Colissimo, Rapide et fiable\nDurée max : 48h\nPartout en France");
-        $carrier1->setPrice(4.9);
+        $carrier1->setDescription("Colissimo, rapide et fiable\nLivraison en 48h");
+        $carrier1->setPrice(4.90);
         $manager->persist($carrier1);
 
         $carrier2 = new Carrier();
         $carrier2->setName('Chronopost');
-        $carrier2->setDescription("Transporteur sécurisé\nMax : 24h\nPartout en France");
-        $carrier2->setPrice(9.9);
+        $carrier2->setDescription("Chronopost, livraison express\n24h en France");
+        $carrier2->setPrice(9.90);
         $manager->persist($carrier2);
 
-        // Utilisateur
-        $user = new User();
-        $user->setEmail('diawaraad97@gmail.com');
-        $user->setRoles(["ROLE_USER", "ROLE_ADMIN"]);
-        $user->setFirstname('Adama');
-        $user->setLastname('Diawara');
-        $user->setIsVerified(true);
-        $user->setPassword($this->passwordHasher->hashPassword($user, 'password'));
-        $manager->persist($user);
+        // ADDRESSES
+        $addresses = [
+            ['Adama', 'Diawara', '182 AV. ROUGET DE LISLE', '94400', 'Vitry-sur-Seine', 'FR', '0659585811', $user1],
+            ['Adama', 'Adama', '182 AV. ROUGET DE LISLE', '94400', 'Vitry-sur-Seine', 'FR', '0659585811', $user2],
+            ['Adama', 'Diawara', "5 AV. DE L'ABBE ROGER DERRY", '94400', 'Vitry-sur-Seine', 'FR', '0659585811', $user1],
+            ['Adama', 'Diawara', '20 Rue de Cuques', '13100', 'Aix-en-Provence', 'FR', '0668429870', $user1],
+        ];
+
+        foreach ($addresses as [$first, $last, $addr, $postal, $city, $country, $phone, $user]) {
+            $adresse = new Adresse();
+            $adresse->setFirstname($first);
+            $adresse->setLastname($last);
+            $adresse->setAdresse($addr);
+            $adresse->setPostal($postal);
+            $adresse->setCity($city);
+            $adresse->setCountry($country);
+            $adresse->setPhone($phone);
+            $adresse->setUser($user);
+            $manager->persist($adresse);
+        }
 
         $manager->flush();
     }
