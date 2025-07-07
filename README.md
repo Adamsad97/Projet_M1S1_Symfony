@@ -40,23 +40,24 @@ Pour Administrateur
 
 GUIDE D'INSTALLATION EN LOCAL:
  1. Cloner la branche concernée (git clone -b Symfony_Integration_TailwindCss https://github.com/Adamsad97/Projet_M1S1_Symfony.git)
-2. Rendez-vous dans le dossier du projer
-3. Installer les dépendances symfony (Composer install)
-4. Installer les dépendances TailwindCss (npm install)
-5. Assurez-vous d'avoir deux(2) terminaux ouverts
-6. Lancez le serveur symfony (symfony serve ou symfony server:start
-7. Lancez TailwindCss (npm run watch)
-8. Assurez-vous d'avoir un Gestion de Base de Données (XAMPP, MAMP ..)
-9. Lancez vos server SQL et APACHE)
-10. N’oubliez pas d'importer la base de données mise à disposition
-11. Exécutez le projet à l'aide d'un navigateur (Chrome, Firefox, Edge ...)
-12. Inscrivez-vous avec une vraie adresse mail, car la vérification de votre compte est obligatoire pour la validation de votre compte
-13. Pour le mot de passe, il faut vous faut: au moins 4 caractères (Au moins 1 majuscule, au moins une minuscule, au moins 1 chiffre, au moins un caractère spécial)
-14. Pour la confirmer votre mot de passe, vous devez saisir le même mot de passe
-15. Pour modifier votre mot de passe, il vous faut obligatoirement saisir l'ancien mot de passe
-16. Pour réinitialiser votre mot de passe, assurez-vous il vous faut obligatoirement l'adresse mail avec laquelle vous vous êtes inscrit(e)
-17. Vous recevrez un lien de réinitialisions, ce lien est valide que pour 10 minutes
-18. Pour passer une commande, merci d'utiliser la CB fictive mise à disposition par Stripe pour des tests (CB pour le test : 4242 4242 4242 4242)
+ 2. Merci de récuprer la base de donnéés (maboutique.sql) après le clonage du projet, elle est parmi les fichiers clonés, merci de l'importer sur votre machine
+3. Rendez-vous dans le dossier du projer
+4. Installer les dépendances symfony (Composer install)
+5. Installer les dépendances TailwindCss (npm install)
+6. Assurez-vous d'avoir deux(2) terminaux ouverts
+7. Lancez le serveur symfony (symfony serve ou symfony server:start
+8. Lancez TailwindCss (npm run watch)
+9. Assurez-vous d'avoir un Gestion de Base de Données (XAMPP, MAMP ..)
+10. Lancez vos server SQL et APACHE)
+11. N’oubliez pas d'importer la base de données mise à disposition
+12. Exécutez le projet à l'aide d'un navigateur (Chrome, Firefox, Edge ...)
+13. Inscrivez-vous avec une vraie adresse mail, car la vérification de votre compte est obligatoire pour la validation de votre compte
+14. Pour le mot de passe, il faut vous faut: au moins 4 caractères (Au moins 1 majuscule, au moins une minuscule, au moins 1 chiffre, au moins un caractère spécial)
+15. Pour la confirmer votre mot de passe, vous devez saisir le même mot de passe
+16. Pour modifier votre mot de passe, il vous faut obligatoirement saisir l'ancien mot de passe
+17. Pour réinitialiser votre mot de passe, assurez-vous il vous faut obligatoirement l'adresse mail avec laquelle vous vous êtes inscrit(e)
+18. Vous recevrez un lien de réinitialisions, ce lien est valide que pour 10 minutes
+19. Pour passer une commande, merci d'utiliser la CB fictive mise à disposition par Stripe pour des tests (CB pour le test : 4242 4242 4242 4242)
 
 URL Github : https://github.com/Adamsad97/Projet_M1S1_Symfony/tree/Symfony_Integration_TailwindCss
 
