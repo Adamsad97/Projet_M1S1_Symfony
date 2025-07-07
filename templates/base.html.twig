@@ -15,7 +15,7 @@
 <header class="bg-gray-900 text-white sticky top-0 z-50">
     <nav class="w-full px-6 flex items-center justify-between py-4">        <a class="text-2xl font-bold" href="{{ path('app_home') }}">ElecSmartDev</a>
         <button class="block md:hidden px-2 py-1 border rounded text-gray-200 border-green-700" onclick="document.getElementById('navbar-menu').classList.toggle('hidden')">
-            <!-- Menu Icon Heroicon -->
+            
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5" />
             </svg>
@@ -61,7 +61,7 @@ document.addEventListener('click', function(event) {
             <div class="flex items-center space-x-4 mt-4 md:mt-0 md:ml-6">
                 {% if app.user %}
                     <a href="{{ path('app_account') }}" class="flex items-center gap-1 hover:text-blue-400 transition">
-                        <!-- User Icon Heroicon -->
+                        
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M16.6854 17.1039C18.5721 15.326 19.75 12.8039 19.75 10.0068C19.75 4.62206 15.3848 0.256836 10 0.256836C4.61522 0.256836 0.25 4.62206 0.25 10.0068C0.25 12.8039 1.42785 15.326 3.31463 17.1039C5.06012 18.7488 7.41234 19.7568 10 19.7568C12.5877 19.7568 14.9399 18.7488 16.6854 17.1039ZM4.14512 15.8191C5.51961 14.1046 7.63161 13.0068 10 13.0068C12.3684 13.0068 14.4804 14.1046 15.8549 15.8191C14.3603 17.3246 12.289 18.2568 10 18.2568C7.711 18.2568 5.63973 17.3246 4.14512 15.8191ZM13.75 7.00684C13.75 9.0779 12.0711 10.7568 10 10.7568C7.92893 10.7568 6.25 9.0779 6.25 7.00684C6.25 4.93577 7.92893 3.25684 10 3.25684C12.0711 3.25684 13.75 4.93577 13.75 7.00684Z" fill="#22c55e"/>
                         </svg>
@@ -70,7 +70,7 @@ document.addEventListener('click', function(event) {
                     
 
                     <a href="{{ path('app_account_wishlist') }}" class="inline-block hover:text-pink-400 transition">
-                        <!-- Icône Coeur -->
+                        
                         <svg width="20" height="18" viewBox="0 0 20 18" fill="currentColor" class="text-orange-400" xmlns="http://www.w3.org/2000/svg">
                             <path d="M9.645 17.918c-.13-.07-.44-.24-.766-.437C7.31 16.445 2.75 13.1 2.75 5.257 2.75 2.8 4.798.75 7.257.75c1.383 0 2.635.736 3.387 1.943C11.993 1.486 13.245.75 14.628.75c2.46 0 4.508 2.05 4.508 4.507 0 7.843-4.56 11.188-6.129 12.224-.325.197-.636.367-.766.437a.75.75 0 01-.697 0z"/>
                         </svg>
@@ -79,7 +79,6 @@ document.addEventListener('click', function(event) {
 
                 {% else %}
                     <a href="{{ path('app_login') }}" class="hover:text-blue-400 transition flex items-center gap-1">
-                        <!-- User Icon Heroicon -->
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M16.6854 17.1039C18.5721 15.326 19.75 12.8039 19.75 10.0068C19.75 4.62206 15.3848 0.256836 10 0.256836C4.61522 0.256836 0.25 4.62206 0.25 10.0068C0.25 12.8039 1.42785 15.326 3.31463 17.1039C5.06012 18.7488 7.41234 19.7568 10 19.7568C12.5877 19.7568 14.9399 18.7488 16.6854 17.1039ZM4.14512 15.8191C5.51961 14.1046 7.63161 13.0068 10 13.0068C12.3684 13.0068 14.4804 14.1046 15.8549 15.8191C14.3603 17.3246 12.289 18.2568 10 18.2568C7.711 18.2568 5.63973 17.3246 4.14512 15.8191ZM13.75 7.00684C13.75 9.0779 12.0711 10.7568 10 10.7568C7.92893 10.7568 6.25 9.0779 6.25 7.00684C6.25 4.93577 7.92893 3.25684 10 3.25684C12.0711 3.25684 13.75 4.93577 13.75 7.00684Z" fill="#22c55e"/>
                         </svg>
@@ -87,7 +86,7 @@ document.addEventListener('click', function(event) {
                     </a>
                 {% endif %}
                 <a href="{{ path('app_cart') }}" class="relative hover:text-green-400 transition">
-                    <!-- Shopping Cart Icon Heroicon -->
+                    
              <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 0.75C0 0.335786 0.335786 0 0.75 0H2.37846C3.25256 0 3.99261 0.644984 4.11205 1.51088L4.17955 2.00024C8.75911 2.01263 13.2281 2.49872 17.5398 3.41236C17.9395 3.49706 18.1979 3.88613 18.1209 4.2874C17.7145 6.40548 17.1717 8.47515 16.502 10.4869C16.4 10.7933 16.1134 11 15.7904 11H5C4.88567 11 4.77351 11.0076 4.66393 11.0223C3.78545 11.14 3.05092 11.7153 2.70796 12.5H16.25C16.6642 12.5 17 12.8358 17 13.25C17 13.6642 16.6642 14 16.25 14H1.75948C1.55068 14 1.35133 13.913 1.2094 13.7598C1.06747 13.6067 0.995799 13.4013 1.01164 13.1931C1.13566 11.5628 2.23526 10.2069 3.72829 9.70657L2.62612 1.71584C2.60906 1.59214 2.50333 1.5 2.37846 1.5H0.75C0.335786 1.5 0 1.16421 0 0.75Z" fill="#f59e42"/>
                 <path d="M5 16.5C5 17.3284 4.32843 18 3.5 18C2.67157 18 2 17.3284 2 16.5C2 15.6716 2.67157 15 3.5 15C4.32843 15 5 15.6716 5 16.5Z" fill="#f59e42"/>
@@ -116,7 +115,7 @@ document.addEventListener('click', function(event) {
 
     {% block body%}{% endblock %}
    
-    <!-- FOOTER -->
+    
     <footer class="container">
        
     </footer>
