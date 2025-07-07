@@ -58,4 +58,10 @@ module.exports = {
       },
     },
   },
-};
+  darkMode: 'class',
+  content: [
+    './assets/**/*.{js,jsx,ts,tsx,vue}',
+    './templates/**/*.twig',
+  ],
+  plugins: [],
+}
