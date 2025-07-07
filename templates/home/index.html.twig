@@ -37,7 +37,7 @@
         {% endif %}
     </div>
 
-    <!-- Accroche principale -->
+    
     <div class="w-full flex justify-center">
         <div class="max-w-2xl bg-blue-50 border border-blue-200 rounded-lg shadow p-6 mb-8 mt-2 text-center">
             <h2 class="text-2xl font-bold text-blue-800 mb-2">Bienvenue chez ElecSmartDev</h2>
@@ -46,13 +46,11 @@
     </div>
 
 
-    <!-- Marketing messaging and featurettes
-    ================================================== -->
-    <!-- Wrap the rest of the page in another container to center all the content. -->
+
 
     <div class="container marketing">
 
-        <!-- Three columns of text below the carousel -->
+        
         <div class="row">
             {% for product in productInHomepage %}
                 <div class="col-lg-4">
@@ -62,13 +60,12 @@
                        {{ product.description|raw}}
                    </div>
                     <p><a class="btn btn-secondary mt-2" href="{{  path('app_product', {slug:product.slug}) }}">Découvrir &raquo;</a></p>
-                </div><!-- /.col-lg-4 -->
+                </div>
             {% endfor %}
 
 
-        </div><!-- /.row -->
-        <!-- START THE FEATURETTES -->
+        </div>
 
-    </div><!-- /.container -->
+    </div>
 {% endblock %}
 
