@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20250703081011 extends AbstractMigration
+final class Version20250706235851 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -21,9 +21,6 @@ final class Version20250703081011 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql(<<<'SQL'
-            CREATE TABLE `admin` (id INT AUTO_INCREMENT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB
-        SQL);
-        $this->addSql(<<<'SQL'
             CREATE TABLE adresse (id INT AUTO_INCREMENT NOT NULL, user_id INT NOT NULL, firstname VARCHAR(255) NOT NULL, lastname VARCHAR(255) NOT NULL, adresse VARCHAR(255) NOT NULL, postal VARCHAR(255) NOT NULL, city VARCHAR(255) NOT NULL, country VARCHAR(255) NOT NULL, phone VARCHAR(255) NOT NULL, INDEX IDX_C35F0816A76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB
         SQL);
         $this->addSql(<<<'SQL'
@@ -31,9 +28,6 @@ final class Version20250703081011 extends AbstractMigration
         SQL);
         $this->addSql(<<<'SQL'
             CREATE TABLE category (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, slug VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB
-        SQL);
-        $this->addSql(<<<'SQL'
-            CREATE TABLE customer (id INT AUTO_INCREMENT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB
         SQL);
         $this->addSql(<<<'SQL'
             CREATE TABLE header (id INT AUTO_INCREMENT NOT NULL, title VARCHAR(255) NOT NULL, content LONGTEXT NOT NULL, button_title VARCHAR(255) NOT NULL, button_link VARCHAR(255) NOT NULL, illustration VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB
@@ -55,9 +49,6 @@ final class Version20250703081011 extends AbstractMigration
         SQL);
         $this->addSql(<<<'SQL'
             CREATE TABLE stock (id INT AUTO_INCREMENT NOT NULL, product_id INT DEFAULT NULL, quantity INT NOT NULL, size VARCHAR(255) DEFAULT NULL, INDEX IDX_4B3656604584665A (product_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB
-        SQL);
-        $this->addSql(<<<'SQL'
-            CREATE TABLE supplier (id INT AUTO_INCREMENT NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB
         SQL);
         $this->addSql(<<<'SQL'
             CREATE TABLE `user` (id INT AUTO_INCREMENT NOT NULL, email VARCHAR(180) NOT NULL, roles JSON NOT NULL, password VARCHAR(255) NOT NULL, firstname VARCHAR(255) NOT NULL, lastname VARCHAR(255) NOT NULL, token VARCHAR(255) DEFAULT NULL, token_expire_at DATETIME DEFAULT NULL, last_login_at DATETIME DEFAULT NULL, is_verified TINYINT(1) NOT NULL, UNIQUE INDEX UNIQ_IDENTIFIER_EMAIL (email), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB
@@ -146,9 +137,6 @@ final class Version20250703081011 extends AbstractMigration
             ALTER TABLE user_product DROP FOREIGN KEY FK_8B471AA74584665A
         SQL);
         $this->addSql(<<<'SQL'
-            DROP TABLE `admin`
-        SQL);
-        $this->addSql(<<<'SQL'
             DROP TABLE adresse
         SQL);
         $this->addSql(<<<'SQL'
@@ -156,9 +144,6 @@ final class Version20250703081011 extends AbstractMigration
         SQL);
         $this->addSql(<<<'SQL'
             DROP TABLE category
-        SQL);
-        $this->addSql(<<<'SQL'
-            DROP TABLE customer
         SQL);
         $this->addSql(<<<'SQL'
             DROP TABLE header
@@ -180,9 +165,6 @@ final class Version20250703081011 extends AbstractMigration
         SQL);
         $this->addSql(<<<'SQL'
             DROP TABLE stock
-        SQL);
-        $this->addSql(<<<'SQL'
-            DROP TABLE supplier
         SQL);
         $this->addSql(<<<'SQL'
             DROP TABLE `user`
