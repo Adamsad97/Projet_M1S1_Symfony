@@ -20,8 +20,6 @@ final class PaymentController extends AbstractController
         Stripe::setApiKey($_ENV['STRIPE_SECRET_KEY']);
 
 
-        //$order = $orderRepository->findOneById($id_order);
-        //$product_for_stripe = [];
         $order = $orderRepository->findOneBy([
             'id' => $id_order,
             'user' => $this->getUser(),
@@ -118,6 +116,34 @@ final class PaymentController extends AbstractController
         return $this->render('payment/success.html.twig', [
             'order' => $order,
         ]);
+    }
+
+    #[Route('/commande/annulation/{id}', name: 'app_order_cancel')]
+    public function cancel($id, OrderRepository $orderRepository, EntityManagerInterface $entityManager): Response
+    {
+        $order = $orderRepository->findOneBy([
+            'id' => $id,
+            'user' => $this->getUser(),
+        ]);
+        if (!$order || $order->getState() !== 2) { // Annulation possible seulement si payé mais pas encore traité
+            return $this->redirectToRoute('app_account_order');
+        }
+        $order->setState(5); // 5 = Annulée
+        $entityManager->flush();
+        $mail = new \App\Classe\Mail();
+        $user = $this->getUser();
+        $mail->send(
+            $user->getEmail(),
+            $user->getFirstname(),
+            'Confirmation d\'annulation de votre commande',
+            'order_cancelled.html',
+            [
+                'firstname' => $user->getFirstname(),
+                'order_id' => $order->getId()
+            ]
+        );
+        $this->addFlash('success', 'Votre commande a bien été annulée.');
+        return $this->redirectToRoute('app_account_order', ['id_order' => $order->getId()]);
     }
 
 }

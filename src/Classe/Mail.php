@@ -7,6 +7,8 @@ class Mail
 {
     public function send($to_email, $to_name, $subject, $template, $vars = null)
     {
+        // DEBUG : Vérification de l'appel à la fonction send
+        file_put_contents(__DIR__.'/../../var/log/mailjet_debug.log', "Appel de la fonction send OK\n", FILE_APPEND);
         //récupécuration du template
         $content = file_get_contents(dirname(__DIR__).'/Mail/'.$template);
 
@@ -44,7 +46,9 @@ class Mail
                 ]
             ]
         ];
-        $mj->post(Resources::$Email, ['body' => $body]);
+        $response = $mj->post(Resources::$Email, ['body' => $body]);
+       
+        file_put_contents(__DIR__.'/../../var/log/mailjet_debug.log', print_r($response->getData(), true), FILE_APPEND);
 
 
     }
