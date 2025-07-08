@@ -1,4 +1,4 @@
-PROJET : Mise en place d'une plateforme d'e-commerce.
+PROJET : Mise en place d'une plateforme e-commerce.
 Back-end : Symfony 7
 Front-end : TailwindCss v4
 
