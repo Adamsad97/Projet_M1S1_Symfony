@@ -5,12 +5,12 @@
     <h1 class="text-2xl font-semibold mb-6">Espace Client</h1>
 
     <div class="flex flex-col md:flex-row gap-6 md:items-start">
-        <!-- Menu latéral -->
+
         <div class="w-full md:w-1/4">
             {% include 'account/_menu.html.twig' %}
         </div>
 
-        <!-- Contenu principal -->
+
         <div class="w-full md:w-3/4">
             <h5 class="text-xl font-semibold mb-4">
                 Ma liste de souhait : ({{ app.user.wishlists|length }})
