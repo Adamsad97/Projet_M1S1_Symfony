@@ -64,8 +64,15 @@ URL Github : https://github.com/Adamsad97/Projet_M1S1_Symfony/tree/Symfony_Integ
 Pour cloner : git clone -b Symfony_Integration_TailwindCss https://github.com/Adamsad97/Projet_M1S1_Symfony.git
 
 URL PRODUCTION : https://elecsmart-dev.fr
+
 Email Admin : diawaraad97@gmail.com
 Mot de passe Admin : Ad97#
+
+UTILISATEUR BANNI:
+Email User Banni : diawaraad79@gmail.com
+Email User Banni : Ad97#
+
+
 
 
 
