@@ -1,9 +1,14 @@
-Bonjour {firstname},<br/><br/>
-Merci pour votre commande sur ElecSmartDev !<br/>
-Votre paiement a bien été reçu et votre commande est en cours de traitement.<br/>
-<br/>
-<strong>Détail de la commande :</strong><br/>
-{order_details}
-<br/>
-Si vous avez des questions, n'hésitez pas à nous contacter.<br/><br/>
-L’équipe ElecSmartDev
+<body class="bg-gray-100">
+<div class="p-6 bg-white rounded shadow max-w-lg mx-auto">
+  <h2 class="text-2xl font-bold text-green-600 mb-4">Paiement confirmé</h2>
+  <p class="mb-2">Bonjour <span class="font-semibold">{firstname}</span>,</p>
+  <p class="mb-2">Merci pour votre commande sur <span class="font-semibold">ElecSmartDev</span> !</p>
+  <p class="mb-2">Votre paiement a bien été reçu et votre commande est en cours de traitement.</p>
+  <div class="my-4">
+    <span class="font-bold">Détail de la commande :</span><br/>
+    <span class="text-gray-700">{order_details}</span>
+  </div>
+  <p class="mb-2">Si vous avez des questions, n'hésitez pas à nous contacter.</p>
+  <p class="mt-4 text-gray-700">L’équipe <span class="font-semibold">ElecSmartDev</span></p>
+</div>
+</body>
