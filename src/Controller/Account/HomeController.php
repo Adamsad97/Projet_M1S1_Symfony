@@ -14,9 +14,9 @@ final class HomeController extends AbstractController
     public function index(OrderRepository $orderRepository): Response
     {
         $orders = $orderRepository->findBy([
-            'user' => $this->getUser(),
-            'state' => [2,3]
-
+            'user' => $this->getUser()
+        ], [
+            'createdAt' => 'DESC'
         ]);
        // dd($orders);
         return $this->render('account/index.html.twig', [

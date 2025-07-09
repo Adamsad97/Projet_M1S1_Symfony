@@ -123,8 +123,12 @@ document.addEventListener('click', function(event) {
    <div class="container">
        {% for label, messages in app.session.flashbag.all() %}
            {% for message in messages %}
-               <div class="alert mt-2 alert-{{ label }}">
-                   {{ message }}
+               <div class="mt-2">
+                   {% if label == 'danger' %}
+                       <span class="inline-block px-4 py-2 rounded bg-red-200 text-red-800 text-sm font-semibold shadow border border-red-300">{{ message }}</span>
+                   {% else %}
+                       <span class="inline-block px-4 py-2 rounded bg-green-600 text-white text-sm font-semibold shadow">{{ message }}</span>
+                   {% endif %}
                </div>
            {% endfor %}
        {% endfor %}
