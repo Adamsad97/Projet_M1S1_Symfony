@@ -90,7 +90,13 @@
                     <span class="bg-blue-100 text-blue-700 rounded px-2 sm:px-3 py-1 font-semibold">{{ order.totalwt|price }}</span>
                 </div>
             </div>
-            {% if order.state is defined and order.state == 2 %}
+            <div class="mt-2 mb-2">
+                <div class="flex items-center gap-2 bg-yellow-50 border border-yellow-200 text-yellow-800 px-4 py-3 rounded-lg text-xs sm:text-sm shadow-sm">
+                    <svg class="w-5 h-5 flex-shrink-0 text-yellow-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01M21 12A9 9 0 1 1 3 12a9 9 0 0 1 18 0Z"/></svg>
+                    <span><span class="font-semibold">Info :</span> Vous pouvez annuler votre commande uniquement dans les <span class="font-bold">24h</span> suivant l'achat. Passé ce délai, l'annulation ne sera plus possible.</span>
+                </div>
+            </div>
+{% if order.state is defined and order.state == 2 and (order.createdAt is defined and order.createdAt|date('U') > ("now"|date('U') - 86400)) %}
                 <div class="flex justify-end mt-4">
                     <a href="{{ path('app_account_order_cancel', {id: order.id}) }}"
                        class="px-3 py-1 text-sm font-medium text-white bg-red-500 border border-red-600 rounded hover:bg-red-600 transition shadow-sm"
