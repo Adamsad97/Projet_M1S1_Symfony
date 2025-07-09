@@ -1,29 +1,34 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="container my-5">
-        <h1>Espace Client</h1>
-        <div class="row">
-            <div class="col-md-3">
-                {% include 'account/_menu.html.twig'%}
-            </div>
-            <div class="col-md-9">
-                <h5>Mes adresses</h5>
-                {{ form_start(adresseForm)}}
-                <div class="row">
-                    <div class="col-md-6">{{ form_row(adresseForm.firstname) }}</div>
-                    <div class="col-md-6">{{ form_row(adresseForm.lastname) }}</div>
-                    <div class="col-md-6">{{ form_row(adresseForm.adresse) }}</div>
-                    <div class="col-md-6">{{ form_row(adresseForm.postal) }}</div>
-                    <div class="col-md-6">{{ form_row(adresseForm.city) }}</div>
-                    <div class="col-md-6">{{ form_row(adresseForm.country) }}</div>
-                    <div class="col-md-6">{{ form_row(adresseForm.phone) }}</div>
-
-
-                </div>
-                {{ form_end(adresseForm)}}
+<div class="min-h-screen flex justify-center px-4 py-10 bg-gray-50">
+    <div class="w-full max-w-6xl  p-6   flex flex-col md:flex-row gap-8">
+        
+        <div class="md:w-1/4 w-full">
+            <h1 class="text-3xl font-bold mb-6 text-center md:text-left">Espace Client</h1>
+            <div class="md:block flex justify-center">
+                {% include 'account/_menu.html.twig' %}
             </div>
         </div>
 
+        <div class="md:w-3/4 w-full  bg-gradient-to-b from-gray-300 to-gray-400 rounded-2xl shadow-lg p-8 mb-auto">
+            <h5 class="text-xl font-bold mb-4 text-center md:text-left">Mes adresses</h5>
+
+            {{ form_start(adresseForm) }}
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {{ form_row(adresseForm.firstname) }}
+                {{ form_row(adresseForm.lastname) }}
+                {{ form_row(adresseForm.adresse) }}
+                {{ form_row(adresseForm.postal) }}
+                {{ form_row(adresseForm.city) }}
+                {{ form_row(adresseForm.country) }}
+                {{ form_row(adresseForm.phone) }}
+            </div>
+            <div class="mt-8">
+                {{ form_row(adresseForm.submit) }}
+            </div>
+            {{ form_end(adresseForm) }}
+        </div>
     </div>
+</div>
 {% endblock %}

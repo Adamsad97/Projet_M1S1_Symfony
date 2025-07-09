@@ -1,28 +1,60 @@
 {% extends 'base.html.twig' %}
 
-
 {% block body %}
-    <div class="container my-5">
-        <h1>Connexion</h1>
-        {% if error %}
-            <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-        {% endif %}
+    <div class="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+        <div class="w-full max-w-md bg-gradient-to-b from-gray-300 to-gray-400 rounded-2xl p-6 shadow-md">
+            
+            <h1 class="text-center text-2xl font-bold text-gray-800 mb-6">Connexion</h1>
 
-        <form action="{{ path('app_login') }}" method="post">
-            <label for="username">Votre email:</label>
-            <input class="form-control" type="text" id="username" name="_username" value="{{ last_username }}" required>
+            {% if error %}
+                <div class="mb-4 text-sm text-red-600 text-center font-semibold">
+                    {{ error.messageKey|trans(error.messageData, 'security') }}
+                </div>
+            {% endif %}
 
-            <label for="password mt-2">Votre mot de passe:</label>
-            <input class="form-control" type="password" id="password" name="_password" required>
+            <form action="{{ path('app_login') }}" method="post" class="space-y-4">
+                <div>
+                    <label for="username" class="block text-sm font-semibold text-gray-700">Votre email :</label>
+                    <input
+                        type="text"
+                        id="username"
+                        name="_username"
+                        required
+                        placeholder="Obligatoire*"
+                        value="{{ last_username }}"
+                        class="mt-1 w-full px-3 py-1 rounded-2xl border border-gray-300 bg-white placeholder:text-gray-500 text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    />
+                </div>
 
-            {# Rédirection sur la page espace membre privé quand on est connecté app_account#}
-        <input type="hidden" name="_target_path" value="{{ path('app_account') }}">
+                <div>
+                    <label for="password" class="block text-sm font-semibold text-gray-700 mt-2">Votre mot de passe :</label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="_password"
+                        required
+                        placeholder="Obligatoire*"
+                        class="mt-1 w-full px-3 py-1 rounded-2xl border border-gray-300 bg-white placeholder:text-gray-500 text-base focus:outline-none focus:ring-2 focus:ring-blue-400"
+                    />
+                </div>
 
-            <button class="btn btn-success mt-2 mb-3" type="submit">Me connecter</button>
-        </form>
-        <br/>
-            Vous n'avez pas de compte ? <a href="{{ path('app_register') }}">Créer un compte ici</a> <br/>
-            <a href="{{ path('app_password') }}">Mot de passe oublié ?</a>
+                <input type="hidden" name="_target_path" value="{{ path('app_account') }}">
 
+                <button type="submit"
+                        class="w-full bg-green-600 hover:bg-green-700 transition-colors duration-200 text-white font-bold py-2 rounded-2xl mt-4 cursor-pointer">
+                    Me connecter
+                </button>
+            </form>
+
+            <div class="mt-6 text-center text-sm text-gray-700">
+                <p class="mb-2">
+                    Vous n'avez pas de compte ?
+                    <a href="{{ path('app_register') }}" class="text-blue-600 font-bold hover:underline">Créer un compte ici</a>
+                </p>
+                <p>
+                    <a href="{{ path('app_password') }}" class="text-blue-600 font-bold hover:underline">Mot de passe oublié ?</a>
+                </p>
+            </div>
+        </div>
     </div>
 {% endblock %}

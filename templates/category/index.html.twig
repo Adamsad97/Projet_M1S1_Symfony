@@ -1,22 +1,20 @@
 {% extends 'base.html.twig' %}
 
-
 {% block body %}
+    <div class="max-w-6xl mx-auto py-12 px-4">
+        <h1 class="font-extrabold text-4xl mb-4 text-center text-green-900 tracking-tight">{{ category.name }}</h1>
+        <p class="mb-10 text-center text-gray-700 text-lg">Pour cette catégorie, il reste {{ category.products|length }} produit(s) disponible(s)</p>
 
-    <div class="container my-5">
-        <h1>{{category.name}}</h1>
-        <p>Pour cette catégorie, il reste {{ category.products|length }} produit(s) dispobible(s)</p>
-
-            <div class="row">
-                {% for product in category.products %}
-                <div class="col-md-3 text-center">
-                    <a href="{{ path('app_product', {slug:product.slug}) }}" class="text-decoration-none">
-                        <img src="/uploads/{{ product.illustration }}" class="img-fluid">
-                        <span class="d-block fw-bold text-black">{{ product.name }}</span>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {% for product in category.products %}
+                <div class="flex flex-col items-center bg-green-50 rounded-2xl p-4 shadow hover:bg-green-100 transition group">
+                    <a href="{{ path('app_product', {slug:product.slug}) }}" class="block w-full">
+                        <img src="/uploads/{{ product.illustration }}" alt="{{ product.name }}" class="mx-auto w-28 h-28 rounded-2xl object-contain shadow-sm transition-transform duration-200 group-hover:scale-105 bg-white">
+                        <span class="block font-semibold text-green-900 mt-3 text-lg">{{ product.name }}</span>
                     </a>
-                        <span class="d-block">{{ product.pricewt|price }}</span>
+                    <span class="block text-green-700 mt-2 text-base font-bold">{{ product.pricewt|price }}</span>
                 </div>
-                {% endfor %}
-            </div>
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}

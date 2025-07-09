@@ -1,40 +1,64 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="container my-5">
-        <h1>Espace Client</h1>
-        <div class="row">
-            <div class="col-md-3">
-                {% include 'account/_menu.html.twig'%}
-            </div>
-            <div class="col-md-9">
-                <div class="d-flex justify-content-between">
-                    <h5>Mes adresses</h5>
-                    <a href="{{ path('app_account_adresse_form') }}" class="btn btn-light">Ajouter une adresse</a>
+<div class="min-h-screen bg-gray-100 py-10 px-4 flex justify-center items-start">
+    <div class="w-full max-w-6xl bg-gray-200 shadow rounded-2xl  p-6">
 
+        <h1 class="text-3xl font-bold mb-8 text-center">Espace Client</h1>
+
+        
+        <div class="flex flex-col md:flex-row gap-8">
+
+
+            <div class="w-full md:w-1/4">
+                <div class="flex justify-center md:justify-end">
+                    {% include 'account/_menu.html.twig' %}
+                </div>
+            </div>
+
+
+            <div class="w-full md:w-3/4">
+                
+                <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mb-6">
+                    <h5 class="text-xl font-semibold text-center sm:text-left w-full sm:w-auto">Mes adresses</h5>
+                    <a href="{{ path('app_account_adresse_form') }}"
+                       class="bg-gray-500 hover:bg-green-800 font-bold text-white px-4 py-2 rounded-2xl text-sm  transition">
+                        Ajouter une adresse
+                    </a>
                 </div>
 
-                {% if app.user.adresses|length == 0   %}
-                    <p class="text-danger">Vous n'avez aucune adresse enrégistrée pour le moment!!</p>
-                    {% else %}
+                
+                {% if app.user.adresses|length == 0 %}
+                    <p class="text-red-600 text-center">Vous n'avez aucune adresse enregistrée pour le moment !</p>
+                {% else %}
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {% for adresses in app.user.adresses %}
+                            <div class="bg-gray-100 p-4 rounded-2xl shadow-sm transform hover:scale-105 hover:bg-gradient-to-b hover:from-slate-100 hover:to-slate-300 cursor-pointer">
+                                <p class="font-bold mb-2">{{ adresses.firstname }} {{ adresses.lastname }}</p>
+                                <p>{{ adresses.adresse }}</p>
+                                <p>{{ adresses.postal }} {{ adresses.city }}</p>
+                                <p>{{ adresses.country }}</p>
 
-                        <div class="row">
-                            {% for adresses in app.user.adresses %}
-                                <div class="col-md-4 mt-2">
-                                    <div class="bg-light p-2">
-                                        <strong>{{ adresses.firstname }} {{ adresses.lastname }}<br/></strong>
-                                        {{ adresses.adresse }}<br/>
-                                        {{ adresses.postal }} {{ adresses.city }}<br/>
-                                        {{ adresses.country }} <br/>
-                                        <a class="small text-primary mt-2 text-decoration-none" href="{{ path('app_account_adresse_form', {id : adresses.id}) }}">Modifier</a>
-                                        <a class="small text-danger mt-2 text-decoration-none mt-2" href="{{ path('app_account_adresses_delete', {id : adresses.id}) }}">Supprimer</a>
-                                    </div>
+                                <div class="mt-4 flex flex-col gap-1">
+                                    <a href="{{ path('app_account_adresse_form', {id : adresses.id}) }}"
+                                       class="text-sm text-blue-600 hover:underline">
+                                       
+                                        Modifier
+                                    </a>
+                                    <a href="{{ path('app_account_adresses_delete', {id : adresses.id}) }}"
+                                        class="flex items-center gap-2 text-sm text-red-600 hover:text-red-800 hover:underline">
+                                        <svg width="12" height="14" viewBox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M3 2.25464V3.00464H0.75C0.335786 3.00464 0 3.34043 0 3.75464C0 4.16885 0.335786 4.50464 0.75 4.50464H1.05L1.86493 12.6539C1.94161 13.4207 2.58685 14.0046 3.35748 14.0046H8.64252C9.41315 14.0046 10.0584 13.4207 10.1351 12.6539L10.95 4.50464H11.25C11.6642 4.50464 12 4.16885 12 3.75464C12 3.34043 11.6642 3.00464 11.25 3.00464H9V2.25464C9 1.012 7.99264 0.00463867 6.75 0.00463867H5.25C4.00736 0.00463867 3 1.012 3 2.25464ZM5.25 1.50464C4.83579 1.50464 4.5 1.84043 4.5 2.25464V3.00464H7.5V2.25464C7.5 1.84043 7.16421 1.50464 6.75 1.50464H5.25ZM4.05044 5.00557C4.46413 4.98489 4.81627 5.30349 4.83696 5.71719L5.11195 11.2172C5.13264 11.6309 4.81404 11.983 4.40034 12.0037C3.98665 12.0244 3.63451 11.7058 3.61383 11.2921L3.33883 5.79209C3.31814 5.3784 3.63674 5.02626 4.05044 5.00557ZM7.95034 5.00557C8.36404 5.02626 8.68264 5.3784 8.66195 5.79209L8.38696 11.2921C8.36627 11.7058 8.01413 12.0244 7.60044 12.0037C7.18674 11.983 6.86814 11.6309 6.88883 11.2172L7.16383 5.71719C7.18451 5.30349 7.53665 4.98489 7.95034 5.00557Z" fill="currentColor"/>
+                                        </svg>
+                                        Supprimer</a>
                                 </div>
-                            {% endfor %}
-                        </div>
-                {% endif%}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
             </div>
         </div>
-
     </div>
+</div>
 {% endblock %}

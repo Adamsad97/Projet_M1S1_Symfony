@@ -1,10 +1,23 @@
 {% extends 'base.html.twig' %}
-    {% block body %}
-        <div class="container my-5">
-            <div class="small-block">
-                    <h1>Mot de passe oublié</h1>
-                    {{ form(forgotPasswordForm) }} 
-                    <p>Vous avez déjà un compte ? <a href="{{ path('app_login') }}">Connectez-vous ici</a>.</p>
-                </div>
-        </div>
-    {% endblock %}
+{% block body %}
+<div class="min-h-screen flex items-center justify-center bg-gray-50 py-8 px-4">
+  <div class="w-full max-w-md bg-gradient-to-b from-gray-300 to-gray-400 rounded-2xl p-6 shadow-md">
+    <h1 class="text-2xl font-bold mb-6 text-center">Mot de passe oublié</h1>
+    {{ form_start(forgotPasswordForm) }}
+      <div class="mb-4">
+        {{ form_label(forgotPasswordForm.email, null, {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+        {{ form_widget(forgotPasswordForm.email, {'attr': {'class': 'w-full px-3 py-1 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-green-400 bg-gray-100'}}) }}
+        {% if form_errors(forgotPasswordForm.email) %}
+          <div class="text-red-600 text-sm mt-1">{{ form_errors(forgotPasswordForm.email) }}</div>
+        {% endif %}
+      </div>
+      <div class="mb-6">
+        {{ form_widget(forgotPasswordForm.submit, {'attr': {'class': 'w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition duration-200 shadow cursor-pointer'}}) }}
+      </div>
+    {{ form_end(forgotPasswordForm) }}
+    <p class="mt-4 text-center font-semibold text-gray-700">Vous avez déjà un compte ?
+      <a href="{{ path('app_login') }}" class="text-green-700 hover:underline font-semibold">Connectez-vous ici</a>.
+    </p>
+  </div>
+</div>
+{% endblock %}

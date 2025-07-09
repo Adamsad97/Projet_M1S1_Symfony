@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Classe\Cart;
+use App\Classe\Mail;
 use App\Repository\OrderRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Stripe\Checkout\Session;
@@ -19,8 +20,6 @@ final class PaymentController extends AbstractController
         Stripe::setApiKey($_ENV['STRIPE_SECRET_KEY']);
 
 
-        //$order = $orderRepository->findOneById($id_order);
-        //$product_for_stripe = [];
         $order = $orderRepository->findOneBy([
             'id' => $id_order,
             'user' => $this->getUser(),
@@ -94,6 +93,23 @@ final class PaymentController extends AbstractController
             $order->setState(2);
             $cart->remove();
             $entityManager->flush();
+
+            $mail = new Mail();
+            $user = $this->getUser();
+            $orderDetails = '';
+            foreach ($order->getOrderDetails() as $detail) {
+                $orderDetails .= $detail->getProductName() . ' x' . $detail->getProductQuantity() . ' - ' . number_format($detail->getProductPrice(), 2, ',', ' ') . '€<br/>';
+            }
+            $mail->send(
+                $user->getEmail(),
+                $user->getFirstname(),
+                'Confirmation de votre commande',
+                'order_confirmation.html',
+                [
+                    'firstname' => $user->getFirstname(),
+                    'order_details' => $orderDetails
+                ]
+            );
         }
 
         return $this->render('payment/success.html.twig', [

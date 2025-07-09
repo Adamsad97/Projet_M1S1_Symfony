@@ -5,7 +5,6 @@
         <div class="carousel-indicators">
             {% if headers|length > 1 %}
                 {% for key,header in headers %}
-
                     <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="{{ key }}" {% if key == 0 %}class="active" aria-current="true" {% endif %} aria-label="{{ header.title }}"></button>
                 {% endfor %}
             {% endif %}
@@ -23,7 +22,6 @@
                     </div>
                 </div>
             {% endfor %}
-
         </div>
         {% if headers|length > 1 %}
             <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
@@ -37,14 +35,15 @@
         {% endif %}
     </div>
 
-
-    <!-- Marketing messaging and featurettes
-    ================================================== -->
-    <!-- Wrap the rest of the page in another container to center all the content. -->
+    
+    <div class="w-full flex justify-center">
+        <div class="max-w-2xl bg-blue-50 border border-blue-200 rounded-lg shadow p-6 mb-8 mt-2 text-center">
+            <h2 class="text-2xl font-bold text-blue-800 mb-2">Bienvenue chez ElecSmartDev</h2>
+            <p class="text-blue-900 text-base font-medium">Découvrez ElecSmartDev, votre boutique spécialisée dans la vente de matériel électronique de qualité, au meilleur prix. Profitez d’un large choix de composants, accessoires et innovations pour tous vos projets !</p>
+        </div>
+    </div>
 
     <div class="container marketing">
-
-        <!-- Three columns of text below the carousel -->
         <div class="row">
             {% for product in productInHomepage %}
                 <div class="col-lg-4">
@@ -54,13 +53,9 @@
                        {{ product.description|raw}}
                    </div>
                     <p><a class="btn btn-secondary mt-2" href="{{  path('app_product', {slug:product.slug}) }}">Découvrir &raquo;</a></p>
-                </div><!-- /.col-lg-4 -->
+                </div>
             {% endfor %}
-
-
-        </div><!-- /.row -->
-        <!-- START THE FEATURETTES -->
-
-    </div><!-- /.container -->
+        </div>
+    </div>
 {% endblock %}
 

@@ -83,7 +83,7 @@ final class AdresseController extends AbstractController
         }
 
         return $this->render('account/adresse/form.html.twig', [
-            'adresseForm' => $form
+            'adresseForm' => $form->createView()
         ]);
     }
 }

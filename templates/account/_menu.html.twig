@@ -1,22 +1,61 @@
-<ul class="nav flex-column bg-light-blue ">
-    <li class="nav-item">
-        <a class="nav-link "  href="{{ path('app_account') }}">Mes commandes</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ path('app_account_adresses') }}">Mes adresses</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ path('app_account_wishlist') }}">Ma liste de souhait</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ path('app_account_modify_pwd') }}">Modifier mon mot de passe</a>
-    </li>
-    <li class="nav-item">
-        {% if is_granted('ROLE_ADMIN') %}
-            <a class="nav-link" href="{{ path('admin') }}">Administration</a>
-        {% endif %}
-    </li>
-    <li class="nav-item">
-        <a class="nav-link " href="{{ path('app_logout') }}" >Me déconnecter</a>
-    </li>
-</ul>
+
+    <div class="bg-gradient-to-b from-gray-100 to-gray-300 rounded-2xl shadow-lg p-4">
+        <ul class="space-y-2">
+            <li>
+                <a href="{{ path('app_account') }}" class="flex items-center text-gray-800 hover:text-green-700 font-medium px-3 py-2 rounded transition-colors duration-200">
+                    
+                    
+                    <svg class="w-5 h-5 mr-2"  width="12" height="14" viewBox="0 0 12 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M2.99989 3C2.99989 1.34315 4.34304 0 5.99989 0C7.65675 0 8.99989 1.34315 8.99989 3V4H9.64241C10.413 4 11.0583 4.58394 11.135 5.35074L11.835 12.3507C11.9233 13.2338 11.2298 14 10.3424 14H1.65737C0.76994 14 0.076514 13.2338 0.164817 12.3507L0.864817 5.35075C0.941497 4.58394 1.58675 4 2.35737 4H2.99989V3ZM7.49989 3V4H4.49989V3C4.49989 2.17157 5.17146 1.5 5.99989 1.5C6.82832 1.5 7.49989 2.17157 7.49989 3ZM4.49988 6.75C4.49988 6.33579 4.16409 6 3.74988 6C3.33566 6 2.99988 6.33579 2.99988 6.75V7.75C2.99988 9.40685 4.34302 10.75 5.99988 10.75C7.65673 10.75 8.99988 9.40685 8.99988 7.75V6.75C8.99988 6.33579 8.66409 6 8.24988 6C7.83566 6 7.49988 6.33579 7.49988 6.75V7.75C7.49988 8.57843 6.82831 9.25 5.99988 9.25C5.17145 9.25 4.49988 8.57843 4.49988 7.75V6.75Z" fill="#0F172A"/>
+                    </svg>
+
+                    Mes commandes
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('app_account_adresses') }}" class="flex items-center text-gray-800 hover:text-green-700 font-medium px-3 py-2 rounded transition-colors duration-200">
+                    
+                <svg class="w-5 h-5 mr-2"  width="18" height="21" viewBox="0 0 18 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 8.5116C12 10.1685 10.6569 11.5116 9 11.5116C7.34315 11.5116 6 10.1685 6 8.5116C6 6.85474 7.34315 5.5116 9 5.5116C10.6569 5.5116 12 6.85474 12 8.5116Z" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M16.5 8.5116C16.5 15.6537 9 19.7616 9 19.7616C9 19.7616 1.5 15.6537 1.5 8.5116C1.5 4.36946 4.85786 1.0116 9 1.0116C13.1421 1.0116 16.5 4.36946 16.5 8.5116Z" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                    Mes adresses
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('app_account_wishlist') }}" class="flex items-center text-gray-800 hover:text-green-700 font-medium px-3 py-2 rounded transition-colors duration-200">
+                    <svg class="w-5 h-5 mr-2"   width="20" height="18" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path  d="M19 5.25693C19 2.77165 16.9013 0.756927 14.3125 0.756927C12.3769 0.756927 10.7153 1.88321 10 3.49035C9.28472 1.88321 7.62312 0.756927 5.6875 0.756927C3.09867 0.756927 1 2.77165 1 5.25693C1 12.4775 10 17.2569 10 17.2569C10 17.2569 19 12.4775 19 5.25693Z" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Ma liste de souhait
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('app_account_modify_pwd') }}" class="flex items-center text-gray-800 hover:text-green-700 font-medium px-3 py-2 rounded transition-colors duration-200">
+                    
+                    <svg class="w-5 h-5 mr-2"  width="18" height="22" viewBox="0 0 18 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13.5 9.5116V5.7616C13.5 3.27632 11.4853 1.2616 9 1.2616C6.51472 1.2616 4.5 3.27632 4.5 5.7616V9.5116M3.75 20.7616H14.25C15.4926 20.7616 16.5 19.7542 16.5 18.5116V11.7616C16.5 10.519 15.4926 9.5116 14.25 9.5116H3.75C2.50736 9.5116 1.5 10.519 1.5 11.7616V18.5116C1.5 19.7542 2.50736 20.7616 3.75 20.7616Z" stroke="#0F172A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Modifier mon mot de passe
+                </a>
+            </li>
+            {% if is_granted('ROLE_ADMIN') %}
+            <li>
+                <a href="{{ path('admin') }}" class="flex items-center text-gray-800 hover:text-green-700 font-medium px-3 py-2 rounded transition-colors duration-200">
+                    <svg class="w-5 h-5 mr-2"  width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path  fill-rule="evenodd" clip-rule="evenodd" d="M5.95498 0.454887C5.98054 0.199286 6.19562 0.00463867 6.45249 0.00463867H7.54751C7.80438 0.00463867 8.01946 0.199286 8.04502 0.454887L8.21486 2.15325C8.69862 2.274 9.15449 2.46522 9.57093 2.71536L10.892 1.63447C11.0908 1.47181 11.3805 1.48626 11.5622 1.6679L12.3365 2.44219C12.5181 2.62383 12.5326 2.91355 12.3699 3.11236L11.2891 4.43338C11.5393 4.8499 11.7306 5.30589 11.8514 5.78978L13.5498 5.95961C13.8054 5.98517 14 6.20026 14 6.45713V7.55215C14 7.80902 13.8054 8.0241 13.5498 8.04966L11.8514 8.2195C11.7306 8.70324 11.5394 9.15908 11.2893 9.5755L12.3707 10.8971C12.5333 11.096 12.5189 11.3857 12.3372 11.5673L11.5629 12.3416C11.3813 12.5232 11.0916 12.5377 10.8928 12.375L9.5712 11.2937C9.15469 11.544 8.69873 11.7352 8.21486 11.856L8.04502 13.5544C8.01946 13.81 7.80438 14.0046 7.54751 14.0046H6.45249C6.19562 14.0046 5.98054 13.81 5.95498 13.5544L5.78514 11.856C5.30138 11.7353 4.84551 11.5441 4.42907 11.2939L3.10799 12.3748C2.90917 12.5375 2.61945 12.523 2.43781 12.3414L1.66352 11.5671C1.48188 11.3854 1.46743 11.0957 1.6301 10.8969L2.71093 9.5759C2.46068 9.15937 2.2694 8.70339 2.14861 8.2195L0.450248 8.04966C0.194647 8.0241 0 7.80902 0 7.55215V6.45713C0 6.20026 0.194647 5.98517 0.450248 5.95961L2.14861 5.78978C2.26936 5.30604 2.46056 4.85019 2.71069 4.43377L1.62935 3.11214C1.46668 2.91333 1.48113 2.6236 1.66277 2.44196L2.43706 1.66767C2.6187 1.48603 2.90842 1.47158 3.10724 1.63425L4.4288 2.71553C4.84531 2.4653 5.30127 2.27403 5.78514 2.15325L5.95498 0.454887ZM5 7.00464C5 7.54245 5.21228 8.03068 5.55761 8.39011L5.61453 8.44702C5.97396 8.79236 6.46219 9.00464 7 9.00464C8.10457 9.00464 9 8.10921 9 7.00464C9 6.46683 8.78772 5.9786 8.44239 5.61917L8.38547 5.56225C8.02604 5.21692 7.53781 5.00464 7 5.00464C5.89543 5.00464 5 5.90007 5 7.00464Z" fill="#0F172A"/>
+                    </svg>
+                    Administration
+                </a>
+            </li>
+            {% endif %}
+            <li>
+                <a href="{{ path('app_logout') }}" class="flex items-center text-red-700 hover:text-red-900 font-medium px-3 py-2 rounded transition-colors duration-200">
+                    <svg class="w-5 h-5 mr-2"  stroke="currentColor" width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                         <path  fill-rule="evenodd" clip-rule="evenodd" d="M7 0.0161133C7.41421 0.0161133 7.75 0.3519 7.75 0.766113V7.26611C7.75 7.68033 7.41421 8.01611 7 8.01611C6.58579 8.01611 6.25 7.68033 6.25 7.26611V0.766113C6.25 0.3519 6.58579 0.0161133 7 0.0161133ZM3.11091 2.06637C3.40381 2.35926 3.40381 2.83413 3.11091 3.12703C0.963029 5.27491 0.963029 8.75732 3.11091 10.9052C5.2588 13.0531 8.7412 13.0531 10.8891 10.9052C13.037 8.75732 13.037 5.27491 10.8891 3.12703C10.5962 2.83413 10.5962 2.35926 10.8891 2.06637C11.182 1.77347 11.6569 1.77347 11.9497 2.06637C14.6834 4.80004 14.6834 9.23219 11.9497 11.9659C9.21608 14.6995 4.78392 14.6995 2.05025 11.9659C-0.683418 9.23219 -0.683417 4.80003 2.05025 2.06637C2.34315 1.77347 2.81802 1.77347 3.11091 2.06637Z" fill="#0F172A"/>
+                    </svg>
+                    Me déconnecter
+                </a>
+            </li>
+        </ul>
+    </div>
