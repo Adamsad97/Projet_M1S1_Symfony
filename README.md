@@ -75,6 +75,4 @@ Email User Banni : Ad97#
 
 
 
-
-
 Vous avez à disposition, une Base de données avec des vraies données.
