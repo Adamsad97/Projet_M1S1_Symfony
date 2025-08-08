@@ -3,6 +3,19 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        pink: {
+          50: '#fef1f8',
+          100: '#fee5f3',
+          200: '#ffcaea',
+          300: '#ff9fd7',
+          400: '#ff63ba',
+          500: '#ff2896',
+          600: '#f01279',
+          700: '#d1055e',
+          800: '#ad074d',
+          900: '#8f0c43',
+          950: '#580024',
+        },
         green: {
           50: '#eaffe6',
           100: '#d2fec9',

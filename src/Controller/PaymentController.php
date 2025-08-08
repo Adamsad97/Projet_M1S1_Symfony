@@ -99,7 +99,7 @@ final class PaymentController extends AbstractController
             $user = $this->getUser();
             $orderDetails = '';
             foreach ($order->getOrderDetails() as $detail) {
-                $orderDetails .= $detail->getProductName() . ' x' . $detail->getProductQuantity() . ' - ' . number_format($detail->getProductPrice(), 2, ',', ' ') . '€<br/>';
+                $orderDetails .= $detail->getProductName() . ' x' . $detail->getProductQuantity() . ' - ' . number_format($detail->getProductPricewt(), 2, ',', ' ') . '€ TTC<br/>';
             }
             $mail->send(
                 $user->getEmail(),

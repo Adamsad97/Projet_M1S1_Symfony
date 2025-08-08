@@ -28,8 +28,8 @@ class Mail
             'Messages' => [
                 [
                     'From' => [
-                        'Email' => "adiawara35@myges.fr",
-                        'Name' => "ElecStore"
+                        'Email' => "no-reply@elecsmart-dev.fr",
+                        'Name' => "ElecSmartDev"
                     ],
                     'To' => [
                         [
